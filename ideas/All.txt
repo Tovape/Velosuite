@@ -1,0 +1,78 @@
+Idea:
+Self host your life manager
+
+Description:
+App itself is a barebone, a skeleton without interface, and with themes one should be able to edit everything
+
+Stack:
+HTML | CSS | JS | NodeJS | MongoDB | PWA
+Must be bundled and easy to deploy 
+
+Desirable Environment:
+Raspberry Pi 3/Linux/Windows
+
+Setup:
+Must feel like installing a new OS, or when you get brand new hardware and you need to follow the setup guide
+Inset box shadow
+plain color with some background element like a sphere rotating (with visible edges 3D)
+
+Color Palette:
+Blue?
+Black, Gray & White
+
+Typography:
+Open Sans
+Poppins
+
+Must have:
+Weather API
+Clock
+Excel/Sheet API Conn
+for example for grades (students)
+Calendar/Google Calendar API Conn
+Notes with tags
+Reminders
+Actions with automated Scripts
+Themes Editor
+Custom Achivements with a lot of icons to chose
+
+Themes:
+Zip folder with images, music, fonts and xml with all the configuration
+
+Url:
+http://localhost/control.github.io/
+https://www.notion.so/
+https://loophabits.org/
+https://www.youtube.com/watch?v=CWg71MFcj9s
+https://flipclocker.com/
+https://github.com/naver/egjs-flicking
+https://www.youtube.com/watch?v=1gGfsMcf_hM
+https://www.youtube.com/watch?v=PvYhZT99g1s 0:07 3:00
+	Setup
+	https://www.youtube.com/watch?v=h_GPBX5KC5M 
+	https://www.youtube.com/watch?v=vt5Lu_ltPkU
+	Themes
+	https://www.youtube.com/watch?v=Salj3JaTKKI
+
+Loading text:
+Jump back and get back a little more
+This should be fun, it's always nice to have a goal in life, and this one I can get behind
+Getting started
+Make all your dreams come true
+Enought Chat. Let's go/start
+Clear goals, little steps and always push forward. You'll be able to tank any hit and keep moving forward.
+Don't try to save the world, save yourself first
+Everyone has their own path, there's no template.
+Tough times create strong men, strong men create easy times. Easy times create weak men, weak men create tough times.
+If you want to go fast, go alone. If you want to go far, go together.
+A man is not defined by his height but the heights he has achieved.
+
+Customization:
+Colors
+Position
+Fonts
+Effects
+Animations
+
+Other:
+There should be a theme gallery/explorer
