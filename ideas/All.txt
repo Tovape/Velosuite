@@ -38,6 +38,7 @@ Custom Achivements with a lot of icons to chose
 
 Themes:
 Zip folder with images, music, fonts and xml with all the configuration
+Apple OS Theme
 
 Url:
 http://localhost/control.github.io/
@@ -48,6 +49,7 @@ https://flipclocker.com/
 https://github.com/naver/egjs-flicking
 https://www.youtube.com/watch?v=1gGfsMcf_hM
 https://www.youtube.com/watch?v=PvYhZT99g1s 0:07 3:00
+https://tweek.so/
 	Setup
 	https://www.youtube.com/watch?v=h_GPBX5KC5M 
 	https://www.youtube.com/watch?v=vt5Lu_ltPkU
@@ -73,6 +75,7 @@ Position
 Fonts
 Effects
 Animations
+Navigation (Generic Dashboard/Chrome page switch)
 
 Other:
 There should be a theme gallery/explorer
