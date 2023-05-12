@@ -3,10 +3,11 @@ Self host your life manager
 
 Description:
 App itself is a barebone, a skeleton without interface, and with themes one should be able to edit everything
+This app is for discipline and organizing life, for a more productive oriented app notion is the best choice
+Must be bundled and easy to deploy 
 
 Stack:
-HTML | CSS | JS | NodeJS | MongoDB | PWA
-Must be bundled and easy to deploy 
+HTML | CSS | JS | NodeJS | EJS | MongoDB | PWA | Chart.JS
 
 Desirable Environment:
 Raspberry Pi 3/Linux/Windows
@@ -30,17 +31,30 @@ Clock
 Excel/Sheet API Conn
 for example for grades (students)
 Calendar/Google Calendar API Conn
-Notes with tags
+Notes with tags and categories
+Deadlines
 Reminders
 Actions with automated Scripts
 Themes Editor
 Custom Achivements with a lot of icons to chose
+Timeline with schedules and selected days
+Notes must have blocks and blocks can be of type of tables, text, image, gallery, raw html, automation, todo-list, bullet list, numbered list, quotes, divider
+All tags must be able to have <a> tags inside them, using a visual editor
+There should be a theme gallery/explorer
+Shortcuts, properly key for tab (next input or btn), for navigation etc
+Mental/Physical Health Checking
 
 Themes:
 Zip folder with images, music, fonts and xml with all the configuration
 Apple OS Theme
+Check abstract gallery folder
+Each input, selector etc must be an ejs and will be called on the theme or smth
+Car start odometer could look great
+Black Ops Zombies Earth, plus maybe randomised for other planets and the sun (sun 100% width)
 
-Url:
+Ideas:
+GoPro Awards: Million Dollar Challenge Highlight 
+https://ideanote.io/
 http://localhost/control.github.io/
 https://www.notion.so/
 https://loophabits.org/
@@ -49,12 +63,30 @@ https://flipclocker.com/
 https://github.com/naver/egjs-flicking
 https://www.youtube.com/watch?v=1gGfsMcf_hM
 https://www.youtube.com/watch?v=PvYhZT99g1s 0:07 3:00
+https://magicmirror.builders/
 https://tweek.so/
-	Setup
+https://www.youtube.com/watch?v=NXEwG1CWJrc
+https://codepen.io/a7rarpress/pen/JjmrpPZ
+https://github.com/Anemolo/Infinite-Lights
+https://www.youtube.com/watch?v=znliDeZOZx0 1:14 2:04 2:23
+https://www.youtube.com/watch?v=9F9i8Q9nmQs 1:32
+https://www.youtube.com/watch?v=yTBNTthg1dM 5:00
+
+	Setup:
+	https://www.youtube.com/watch?v=70ukrAri1XA
 	https://www.youtube.com/watch?v=h_GPBX5KC5M 
 	https://www.youtube.com/watch?v=vt5Lu_ltPkU
-	Themes
+	https://www.youtube.com/watch?v=uZfO3JcS9tw
+
+	Themes:
 	https://www.youtube.com/watch?v=Salj3JaTKKI
+	https://www.youtube.com/watch?v=vM8M4QloVL0
+	https://www.youtube.com/watch?v=IMmmKkVATRY
+	https://www.youtube.com/watch?v=ddIZlWmfFKM
+	
+	Other:
+	https://www.youtube.com/watch?v=768lISZY9oE
+	https://www.youtube.com/watch?v=_8vSpG7Fk9Q
 
 Loading text:
 Jump back and get back a little more
@@ -75,7 +107,10 @@ Position
 Fonts
 Effects
 Animations
-Navigation (Generic Dashboard/Chrome page switch)
+Navigation (Generic Dashboard/Google Chrome page top tabs)
 
-Other:
-There should be a theme gallery/explorer
+Login:
+At start there's no login screen but the user can activate it and add a password, which can be the normal password or a pin code or a phone style android thing
+
+Loading:
+Loading... where the 2 points do the animation of loading. loading.. loagind... loading thing
