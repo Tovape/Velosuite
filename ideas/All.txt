@@ -4,26 +4,58 @@ Self host your life manager
 Description:
 App itself is a barebone, a skeleton without interface, and with themes one should be able to edit everything
 This app is for discipline and organizing life, for a more productive oriented app notion is the best choice
-Must be bundled and easy to deploy 
+Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | NodeJS | EJS | MongoDB | PWA | Chart.JS
+HTML | CSS | JS | ReactJS | NodeJS | MongoDB | PWA | ChartJS | MomentJS | MUI
 
 Desirable Environment:
 Raspberry Pi 3/Linux/Windows
 
-Setup:
-Must feel like installing a new OS, or when you get brand new hardware and you need to follow the setup guide
-Inset box shadow
-plain color with some background element like a sphere rotating (with visible edges 3D)
+Pages:
+
+	Setup:
+	Must feel like installing a new OS, or when you get brand new hardware and you need to follow the setup guide
+	Inset box shadow for screen
+	plain color with some background element like a sphere rotating (with visible edges 3D)
+
+	Login:
+	At start there's no login screen but the user can activate it and add a password, which can be the normal password or a pin code or a phone style android thing
+
+	Home Screen
+
+	Health: (Combined page for both partido por una barra mental/physical con background img)
+		Mental Health:
+		Brain zoom mri
+		
+		Physical Health:
+		Background a black and white idea body for both men & women	
+		Use glassmorphism
+	
+	Notes
+	
+	Projects
+	
+	Calendar:
+	Deadlines
+	Reminders
+
+	Settings:
+	Custom Achivements
+	Themes
+	Shortcuts
+	Password
+	Backups
+	
 
 Color Palette:
-Blue?
+Blue
 Black, Gray & White
 
 Typography:
 Open Sans
 Poppins
+Roboto
 
 Must have:
 Weather API
@@ -34,26 +66,26 @@ Calendar/Google Calendar API Conn
 Notes with tags and categories
 Deadlines
 Reminders
-Actions with automated Scripts
-Themes Editor
+Skeleton Loading or a loading icon
 Custom Achivements with a lot of icons to chose
 Timeline with schedules and selected days
-Notes must have blocks and blocks can be of type of tables, text, image, gallery, raw html, automation, todo-list, bullet list, numbered list, quotes, divider
-All tags must be able to have <a> tags inside them, using a visual editor
+Notes must have blocks and blocks can be of type of tables, text, image, gallery, raw html, automation, todo-list, bullet list, numbered list, quotes, divider, Markup like Reddit ones, All tags must be able to have <a> tags inside them, using a visual editor
 There should be a theme gallery/explorer
 Shortcuts, properly key for tab (next input or btn), for navigation etc
 Mental/Physical Health Checking
+AI for writting stuff, basically a jarvis
 
 Themes:
-Zip folder with images, music, fonts and xml with all the configuration
+Zip folder with images, music, fonts and json/xml with all the configuration
 Apple OS Theme
 Check abstract gallery folder
-Each input, selector etc must be an ejs and will be called on the theme or smth
+Each input, selector etc must be an ejs/react component and will be called on the theme or smth
 Car start odometer could look great
 Black Ops Zombies Earth, plus maybe randomised for other planets and the sun (sun 100% width)
 
 Ideas:
-GoPro Awards: Million Dollar Challenge Highlight 
+https://vikunja.cloud/
+https://www.awwwards.com/
 https://ideanote.io/
 http://localhost/control.github.io/
 https://www.notion.so/
@@ -63,7 +95,6 @@ https://flipclocker.com/
 https://github.com/naver/egjs-flicking
 https://www.youtube.com/watch?v=1gGfsMcf_hM
 https://www.youtube.com/watch?v=PvYhZT99g1s 0:07 3:00
-https://magicmirror.builders/
 https://tweek.so/
 https://www.youtube.com/watch?v=NXEwG1CWJrc
 https://codepen.io/a7rarpress/pen/JjmrpPZ
@@ -71,6 +102,13 @@ https://github.com/Anemolo/Infinite-Lights
 https://www.youtube.com/watch?v=znliDeZOZx0 1:14 2:04 2:23
 https://www.youtube.com/watch?v=9F9i8Q9nmQs 1:32
 https://www.youtube.com/watch?v=yTBNTthg1dM 5:00
+https://simplemde.com/
+https://mui.com/
+https://www.amcharts.com/
+https://minimals.cc/dashboard/app
+https://mira.bootlab.io/dashboard/analytics
+https://berrydashboard.io/dashboard/default
+GoPro Awards: Million Dollar Challenge Highlight 
 
 	Setup:
 	https://www.youtube.com/watch?v=70ukrAri1XA
@@ -83,14 +121,19 @@ https://www.youtube.com/watch?v=yTBNTthg1dM 5:00
 	https://www.youtube.com/watch?v=vM8M4QloVL0
 	https://www.youtube.com/watch?v=IMmmKkVATRY
 	https://www.youtube.com/watch?v=ddIZlWmfFKM
+	https://zicxa.com/blog/topic/4k-leaves
 	
 	Other:
 	https://www.youtube.com/watch?v=768lISZY9oE
 	https://www.youtube.com/watch?v=_8vSpG7Fk9Q
+	
+	Code:
+	https://www.30secondsofcode.org/css/s/nested-border-radius/
+	https://www.youtube.com/watch?v=IF6k0uZuypA
 
 Loading text:
 Jump back and get back a little more
-This should be fun, it's always nice to have a goal in life, and this one I can get behind
+This should be fun, it's always nice to have a goal in life.
 Getting started
 Make all your dreams come true
 Enought Chat. Let's go/start
@@ -108,9 +151,6 @@ Fonts
 Effects
 Animations
 Navigation (Generic Dashboard/Google Chrome page top tabs)
-
-Login:
-At start there's no login screen but the user can activate it and add a password, which can be the normal password or a pin code or a phone style android thing
 
 Loading:
 Loading... where the 2 points do the animation of loading. loading.. loagind... loading thing
