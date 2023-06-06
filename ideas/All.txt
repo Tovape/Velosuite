@@ -7,7 +7,7 @@ This app is for discipline and organizing life, for a more productive oriented a
 Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | ReactJS | NodeJS | MongoDB | PWA | ChartJS | MomentJS | MUI
+HTML | CSS | JS | NodeJS | MongoDB | PWA | ChartJS | MomentJS | MUI
 
 Desirable Environment:
 Raspberry Pi 3/Linux/Windows
@@ -33,12 +33,14 @@ Pages:
 		Use glassmorphism
 	
 	Notes
+	Type pf task add boolean mode, like updating playlist, its an annoyance to type it xonstantemente, haz que sea un boleano de ahora se tiene q hacer,
 	
 	Projects
 	
 	Calendar:
 	Deadlines
 	Reminders
+	Timeline (repetive tasks like the backup thing you wanted, make a countdown till the task)
 
 	Settings:
 	Custom Achivements
@@ -46,7 +48,6 @@ Pages:
 	Shortcuts
 	Password
 	Backups
-	
 
 Color Palette:
 Blue
@@ -87,6 +88,7 @@ Ideas:
 https://vikunja.cloud/
 https://www.awwwards.com/
 https://ideanote.io/
+https://alextselegidis.com/get/plainpad/standalone
 http://localhost/control.github.io/
 https://www.notion.so/
 https://loophabits.org/
@@ -128,8 +130,12 @@ GoPro Awards: Million Dollar Challenge Highlight
 	https://www.youtube.com/watch?v=_8vSpG7Fk9Q
 	
 	Code:
-	https://www.30secondsofcode.org/css/s/nested-border-radius/
-	https://www.youtube.com/watch?v=IF6k0uZuypA
+	https://www.30secondsofcode.org/css/s/nested-border-radius/ Nested border radius
+	https://www.youtube.com/watch?v=IF6k0uZuypA Menu Style Facebook
+	https://codepen.io/zadvorsky/pen/abaeOK Shatter Glass
+	https://codepen.io/imvpn22/pen/RwPvOgQ Clock code (needs svg background or smth)
+	https://codepen.io/stix/pen/mVXypr/ Another clock design
+	https://voidpet.com/benawad Popup Text
 
 Loading text:
 Jump back and get back a little more
@@ -154,3 +160,17 @@ Navigation (Generic Dashboard/Google Chrome page top tabs)
 
 Loading:
 Loading... where the 2 points do the animation of loading. loading.. loagind... loading thing
+
+On Finishing:
+Publish in producthunt
+
+Code:
+For themes it must use EJS, it will navigate into a theme's folder where it will get all the buttons, dropdowns etc, then by js or language the content of the
+button, dropdown, option etc, will be filled
+for example there will be a folder called themes and inside it there'll be a unique theme by name
+
+/themes/default/dropdown.ejs
+/themes/default/button.ejs
+
+this will be called by ejs include and a parameter from NodeJS which is the active theme, on further development the themes will need a controlled for downloading it,
+since it will be better, it's just downloading a folder and removing it from the user interface
