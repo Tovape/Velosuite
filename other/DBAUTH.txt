@@ -1,0 +1,7 @@
+Create User
+
+db.createUser({ user: "velosuite", pwd: "123456", roles: [ { role: "readWrite", db: "Velosuite" } ] })
+
+Delete User
+
+db.dropUser("velosuite")

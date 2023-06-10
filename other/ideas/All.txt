@@ -7,7 +7,7 @@ This app is for discipline and organizing life, for a more productive oriented a
 Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | NodeJS | MongoDB | PWA | ChartJS | MomentJS | MUI
+HTML | CSS | JS | NodeJS | MongoDB | PWA | ChartJS | MomentJS
 
 Desirable Environment:
 Raspberry Pi 3/Linux/Windows
@@ -174,3 +174,10 @@ for example there will be a folder called themes and inside it there'll be a uni
 
 this will be called by ejs include and a parameter from NodeJS which is the active theme, on further development the themes will need a controlled for downloading it,
 since it will be better, it's just downloading a folder and removing it from the user interface
+this app will need a dev section with some button to empty cache
+
+Todo:
+Add global cache function, check if there is size enough to store stuff like fonts (max priority), images etc
+
+Notes:
+MongoDB creates the table and the database if they dont exist

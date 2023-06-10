@@ -1,8 +1,8 @@
 import express from "express";
-import morgan from "morgan";
-//import userRoutes from "./routes/user.routes.js";
-import { alreadyLogged, authorization } from "./middleware/middleware.js";
 import "./database.js";
+import noteRoutes from "./routes/note.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import { alreadyLogged, authorization } from "./middleware/middleware.js";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import path from "path";
@@ -15,7 +15,6 @@ const app = express();
 const port = 3000;
 
 // USE
-app.use(morgan("dev"))
 app.set('view-engine', 'ejs')
 app.use(express.static(path.join(__dirname)));
 app.use(favicon(__dirname + '/files/images/icons/favicon.ico'));
@@ -24,10 +23,19 @@ app.use(express.urlencoded({limit: '20mb', extended: true}));
 app.use(bodyParser.json({limit: '20mb'}));
 app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(cookieParser());
+app.use("/api/note", noteRoutes)
+app.use("/api/auth", authRoutes)
 
 // GET
 app.get("/", (req, res) => {
 	res.render('index.ejs'),
+	app.use(express.static(__dirname + '/css')),
+	app.use(express.static(__dirname + '/files')),
+	app.use(express.static(__dirname + '/js'))
+})
+
+app.get("/setup", (req, res) => {
+	res.render('setup.ejs'),
 	app.use(express.static(__dirname + '/css')),
 	app.use(express.static(__dirname + '/files')),
 	app.use(express.static(__dirname + '/js'))
