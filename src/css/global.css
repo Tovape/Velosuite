@@ -1,0 +1,96 @@
+/*
+----------------------------------
+github.com/Tovape/Velosuite
+----------------------------------
+/*
+
+/* Global Variables */
+
+:root {
+	
+	/* Color Palette */
+	--white-1: #FFFFFF;
+	--black-1: #000000;
+	--gray-1: #656565;
+	--blue-1: #9DB7E7;
+	--blue-2: #6D94DB;
+	--blue-3: #3C70CF;
+	--blue-4: #0C4DC4;
+	
+	/* Fonts */
+	--bigfont: 34px;
+	--undfont: 24px;
+	--norfont: 18px;
+	--smafont: 14px;
+	--micfont: 10px;
+	
+}
+
+/* Global */
+
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html{
+	zoom: 100%; 
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: ;
+	scroll-behavior: smooth;
+}
+
+button, input {
+	all: unset;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+a,p,li {
+	font-size: ;
+}
+
+a {
+	display: block;
+}
+
+p, a, h1, h2, h3 {
+	margin: 0;
+}
+
+li {
+	margin: 0;
+}
+
+ol,ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
+/* Scrollbar */
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+/* Generic */
+
+.container {
+    max-width: 1400px;
+	width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+	position: relative;
+}

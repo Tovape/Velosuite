@@ -1,0 +1,47 @@
+<!DOCTYPE HTML> 
+<html lang="en">
+
+<head>
+	<title>Velosuite — Setup</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+	<!-- Fonts -->
+	<link href="../files/themes/default/fonts/OpenSansRegular.ttf" type="text/css" rel="stylesheet"> 
+	<link href="../files/themes/default/fonts/RobotoThin.ttf" type="text/css" rel="stylesheet"> 
+	<link href="../files/themes/default/fonts/PoppinsRegular.ttf" type="text/css" rel="stylesheet"> 
+	<link href="../files/themes/default/fonts/PoppinsSemiBold.ttf" type="text/css" rel="stylesheet"> 
+	<!-- Icon -->
+	<link rel="icon" href="../files/images/logo/logo-icon.svg" type="image/gif" sizes="16x16">
+	<link rel="apple-touch-icon" href="../files/images/logo/logo-icon-180.png">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="./css/global.css">
+	<link rel="stylesheet" type="text/css" href="./css/setup.css">
+	<!-- JS -->
+	<script type="text/javascript" src="../js/global.js"></script>
+	<script type="text/javascript" src="../js/setup.js"></script>
+</head>
+
+<body>
+
+<div class="popup" id="popup">
+	<div class="popup-gradient">
+		<img src="./files/images/logo/logo-icon.svg">
+	</div>
+	<div class="popup-content">
+		<div class="popup-content-welcome">
+			<div>
+				<p class="title">Welcome</p>
+				<p class="description">Velosuite is a self hosted app for self improvement and discipline, you'll find a large variety of tools to manage notes, schedules, reminders etc</p>
+			</div>
+			<%- 
+			include('../files/themes/default/components/button.ejs', { context: "continue", dclass: "button2" }) 
+			-%>
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>	
+
+<!--<img src="./files/themes/default/icons/global">-->

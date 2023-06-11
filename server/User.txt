@@ -1,0 +1,3 @@
+use Velosuite
+
+db.createUser({ user: "velosuite", pwd: "123456", roles: [ { role: "readWrite", db: "Velosuite" } ] })

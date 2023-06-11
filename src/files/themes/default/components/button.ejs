@@ -1,0 +1,9 @@
+<% if(context == "simple") { %>
+<h1>foo</h1>
+<% } else if (context == "continue") { %>
+<h1>bar</h1>
+<% } %>
+
+<button onclick="" class="<%= dclass %>">
+<%= context %>
+</button>

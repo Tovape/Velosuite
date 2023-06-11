@@ -1,14 +1,27 @@
 import { Schema, model } from "mongoose";
 
 const generalSchema = new Schema({
-	title: {
+	username: {
 		type: String,
 		required: true
 	},
-	content: {
+	password: {
 		type: String,
 		required: true
-	}
+	},
+	theme: {
+		type: Number,
+		default: 0,
+		required: true
+	},
+	defaultpage: {
+		type: Number,
+		required: true
+	},
+	setup: {
+        type: Boolean,
+        default: false
+    }
 }, {
 	collection: "general",
 	timestamps: true,

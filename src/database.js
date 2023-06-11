@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const mongoURI = 'mongodb://velosuite:123456@localhost:27017/Velosuite'
 const conn = mongoose.createConnection(mongoURI);
-import { generalCheck } from "./controllers/general.controller.js";
+import { generalCheck } from "./controllers/ctrl.controller.js";
 
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,

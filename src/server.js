@@ -2,10 +2,11 @@ import express from "express";
 import "./database.js";
 import noteRoutes from "./routes/note.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-import { alreadyLogged, authorization } from "./middleware/middleware.js";
+import ctrlRoutes from "./routes/ctrl.routes.js";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import path from "path";
+import fs from 'fs';
 import { fileURLToPath } from "url";
 import favicon from "serve-favicon";
 import bodyParser from "body-parser";
@@ -13,6 +14,15 @@ import packagejson from '../package.json' assert { type: 'json' };
 const __dirname = path.resolve();
 const app = express();
 const port = 3000;
+var lock_setup = false;
+var theme_selected = 0;
+var theme_list = [];
+
+// Firewall
+
+app.all(['/server.js', '/database.js', '/controllers/*', '/middleware/*', '/models/*', '/routes/*'], function (req,res, next) {
+   res.status(403).send({ message: 'Access Forbidden' });
+});
 
 // USE
 app.set('view-engine', 'ejs')
@@ -25,21 +35,57 @@ app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(cookieParser());
 app.use("/api/note", noteRoutes)
 app.use("/api/auth", authRoutes)
+app.use("/api/ctrl", ctrlRoutes)
 
 // GET
 app.get("/", (req, res) => {
-	res.render('index.ejs'),
-	app.use(express.static(__dirname + '/css')),
-	app.use(express.static(__dirname + '/files')),
-	app.use(express.static(__dirname + '/js'))
+	if (lock_setup == true) {
+		resSetup()
+	} else {
+		resIndex()
+	}
+})
+
+app.get("/login", (req, res) => {
+	if (lock_setup == true) {
+		resSetup()
+	} else {
+		resLogin()
+	}
 })
 
 app.get("/setup", (req, res) => {
-	res.render('setup.ejs'),
-	app.use(express.static(__dirname + '/css')),
-	app.use(express.static(__dirname + '/files')),
-	app.use(express.static(__dirname + '/js'))
+	if (lock_setup == true) {
+		resSetup()
+	} else {
+		resIndex()
+	}
 })
+
+function resIndex() {
+	res.render('index.ejs')
+}
+
+function resSetup() {
+	res.render('setup.ejs', { theme_list: theme_list })
+}
+
+function resLogin() {
+	res.render('login.ejs')
+}
+
+// Setup
+export function beginSetup() {
+	lock_setup = true;
+}
+
+// Theme
+fs.readdir(__dirname + '/files/themes', function (err, filesPath) {
+    if (err) throw err;
+    theme_list = filesPath.map(function (filePath) {
+        return filePath;
+    });
+});
 
 // Other
 app.listen(port)
