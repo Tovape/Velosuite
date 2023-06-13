@@ -1,9 +1,9 @@
-<% if(context == "simple") { %>
-<h1>foo</h1>
-<% } else if (context == "continue") { %>
-<h1>bar</h1>
+<button pos="<%= pos %>" onclick="<%= action %>" class="<%= className + " " + context %>">
+<% if(context == "continue") { %>
+	<%= context %>
+	<img src="../files/themes/default/icons/global/arrow-1-right.svg">
+<% } else if(context == "back") { %>
+	<img src="../files/themes/default/icons/global/arrow-1-left.svg">
+	<%= context %>
 <% } %>
-
-<button onclick="" class="<%= dclass %>">
-<%= context %>
 </button>

@@ -1,0 +1,129 @@
+/* Setup Page */
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+	background-color: #6D6D6D;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-color: transparent;
+    z-index: 1;
+    box-shadow: inset 0 0 80vh 50vh rgba(0,0,0,0.5);
+    border-radius: 100%;
+}
+
+.popup {
+	width: 700px;
+	position: relative;
+	z-index: 2;
+	background-color: var(--white-1);
+	border-radius: 14px;
+	display: flex;
+    flex-direction: column;
+	overflow: hidden;
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+}
+
+.popup > div {
+	height: 50%;
+}
+
+.popup .popup-gradient {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	overflow: hidden;
+    position: relative;
+	min-height: 260px;
+}
+
+.popup .popup-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;	
+	z-index: 1;
+	border-radius: 14px;
+	background: linear-gradient(90deg, var(--blue-4) 0%, var(--blue-2) 33%, var(--blue-2) 66%, var(--blue-1) 100%);
+    -webkit-mask-image: -webkit-linear-gradient(black, transparent 95%);
+    -webkit-mask-image: -moz-linear-gradient(black, transparent 95%);
+    -webkit-mask-image: -o-linear-gradient(black, transparent 95%);
+    -webkit-mask-image: linear-gradient(black, transparent 95%);
+    mask-image: linear-gradient(black, transparent 95%);
+}
+
+.popup .popup-gradient > img {
+	height: auto;
+	width: 90px;
+	object-fit: contain;
+	padding: 20px;
+	background-color: var(--white-1);
+	border-radius: 14px;
+	z-index: 2;
+}
+
+.popup .popup-content {
+	width: 100%;
+	height: fit-Content;
+	left: 0%;
+	display: flex;
+	position: relative;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.popup .popup-content > div {
+	padding: 0 50px 50px 50px;
+	height: fit-Content;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    min-width: 100%;
+}
+
+.popup .popup-content > div .title {
+	font-family: var(--poppins);
+	font-size: var(--bigfont);
+}
+
+.popup .popup-content > div .description {
+	font-size: var(--norfont);
+	color: var(--gray-1);
+}
+
+.popup .popup-content > div .description a {
+	display: inline-block;
+	color: var(--blue-1);
+}
+
+.popup-content-buttons {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}

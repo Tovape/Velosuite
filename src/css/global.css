@@ -17,12 +17,16 @@ github.com/Tovape/Velosuite
 	--blue-3: #3C70CF;
 	--blue-4: #0C4DC4;
 	
-	/* Fonts */
+	/* Font Size */
 	--bigfont: 34px;
 	--undfont: 24px;
 	--norfont: 18px;
 	--smafont: 14px;
 	--micfont: 10px;
+	
+	/* Font Size */
+	--poppins: 'Poppins', sans-serif;
+	--opensans: 'Open Sans', sans-serif;
 	
 }
 
@@ -31,6 +35,7 @@ github.com/Tovape/Velosuite
 * {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
 }
 
 html{
@@ -45,7 +50,7 @@ body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	font-family: ;
+	font-family: var(--opensans);
 	scroll-behavior: smooth;
 }
 

@@ -40,37 +40,37 @@ app.use("/api/ctrl", ctrlRoutes)
 // GET
 app.get("/", (req, res) => {
 	if (lock_setup == true) {
-		resSetup()
+		resSetup(req, res)
 	} else {
-		resIndex()
+		resIndex(req, res)
 	}
 })
 
 app.get("/login", (req, res) => {
 	if (lock_setup == true) {
-		resSetup()
+		resSetup(req, res)
 	} else {
-		resLogin()
+		resLogin(req, res)
 	}
 })
 
 app.get("/setup", (req, res) => {
 	if (lock_setup == true) {
-		resSetup()
+		resSetup(req, res)
 	} else {
-		resIndex()
+		resIndex(req, res)
 	}
 })
 
-function resIndex() {
+function resIndex(req, res) {
 	res.render('index.ejs')
 }
 
-function resSetup() {
+function resSetup(req, res) {
 	res.render('setup.ejs', { theme_list: theme_list })
 }
 
-function resLogin() {
+function resLogin(req, res) {
 	res.render('login.ejs')
 }
 

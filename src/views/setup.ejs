@@ -16,6 +16,9 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="./css/global.css">
 	<link rel="stylesheet" type="text/css" href="./css/setup.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/button.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/input.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/dropdown.css">
 	<!-- JS -->
 	<script type="text/javascript" src="../js/global.js"></script>
 	<script type="text/javascript" src="../js/setup.js"></script>
@@ -25,17 +28,66 @@
 
 <div class="popup" id="popup">
 	<div class="popup-gradient">
-		<img src="./files/images/logo/logo-icon.svg">
+		<img id="popup-gradient-icon" src="./files/images/logo/logo-icon.svg">
 	</div>
-	<div class="popup-content">
+	<div class="popup-content" id="popup-content">
 		<div class="popup-content-welcome">
 			<div>
 				<p class="title">Welcome</p>
 				<p class="description">Velosuite is a self hosted app for self improvement and discipline, you'll find a large variety of tools to manage notes, schedules, reminders etc</p>
 			</div>
+			<div class="popup-content-buttons">
+			&nbsp;
 			<%- 
-			include('../files/themes/default/components/button.ejs', { context: "continue", dclass: "button2" }) 
+			include('../files/themes/default/components/button.ejs', { pos: 1, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
 			-%>
+			</div>
+		</div>
+		<div class="popup-content-language">
+			<div>
+				<p class="title">Language</p>
+				<p class="description">If your language is not present you can colaborate by <a href="#">adding the translation</a>. You can always change this on settings</p>
+			</div>
+			<div class="popup-content-buttons">
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 0, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			-%>
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 2, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			-%>
+			</div>
+		</div>
+		<div class="popup-content-language">
+			<div>
+				<p class="title">Customization</p>
+				<p class="description">Velosuite is highly customizable, colors, fonts, effects, animations, ui elements etc<br>You can also design themes and upload them to the <a href="#">theme browser</a></p>
+			</div>
+			<div class="popup-content-buttons">
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 1, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			-%>
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 3, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			-%>
+			</div>
+		</div>
+		<div class="popup-content-account">
+			<div>
+				<p class="title">Account</p>
+				<p class="description">Tell us a little about yourself, you can lock access using a password in settings</p>
+				<br>
+				<%- 
+				include('../files/themes/default/components/input.ejs', { placeholder: "Username", className: "input input-1", name: "username" } ) 
+				-%>
+			</div>
+			<div class="popup-content-buttons">
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 2, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			-%>
+			<%- 
+			include('../files/themes/default/components/button.ejs', { pos: 4, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			-%>
+			</div>
 		</div>
 	</div>
 </div>
