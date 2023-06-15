@@ -19,6 +19,8 @@
 	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/button.css">
 	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/input.css">
 	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/dropdown.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/progress.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/popupmessage.css">
 	<!-- JS -->
 	<script type="text/javascript" src="../js/global.js"></script>
 	<script type="text/javascript" src="../js/setup.js"></script>
@@ -26,8 +28,12 @@
 
 <body>
 
+<%- 
+include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
+%>
+
 <div class="popup" id="popup">
-	<div class="popup-gradient">
+	<div class="popup-gradient" id="popup-gradient">
 		<img id="popup-gradient-icon" src="./files/images/logo/logo-icon.svg">
 	</div>
 	<div class="popup-content" id="popup-content">
@@ -39,7 +45,7 @@
 			<div class="popup-content-buttons">
 			&nbsp;
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 1, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 1, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
 			-%>
 			</div>
 		</div>
@@ -50,10 +56,10 @@
 			</div>
 			<div class="popup-content-buttons">
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 0, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 0, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
 			-%>
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 2, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 2, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
 			-%>
 			</div>
 		</div>
@@ -64,10 +70,10 @@
 			</div>
 			<div class="popup-content-buttons">
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 1, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 1, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
 			-%>
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 3, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 3, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
 			-%>
 			</div>
 		</div>
@@ -77,16 +83,31 @@
 				<p class="description">Tell us a little about yourself, you can lock access using a password in settings</p>
 				<br>
 				<%- 
-				include('../files/themes/default/components/input.ejs', { placeholder: "Username", className: "input input-1", name: "username" } ) 
+				include(`../files/themes/${theme_name}/components/input.ejs`, { placeholder: "Username", className: "input input-1", name: "username" } ) 
 				-%>
 			</div>
 			<div class="popup-content-buttons">
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 2, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 2, context: "back", className: "button button-1 button-back", action: "backSlide(this)" } ) 
 			-%>
 			<%- 
-			include('../files/themes/default/components/button.ejs', { pos: 4, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
+			include(`../files/themes/${theme_name}/components/button.ejs`, { pos: 4, context: "continue", className: "button button-1 button-next", action: "nextSlide(this)" } ) 
 			-%>
+			</div>
+		</div>
+		<div class="popup-content-init">
+			<div>&nbsp;</div>
+			<div class="content">
+				<div>
+					<p class="title-init">Initializing</p>
+					<p class="subtitle-init">Velosuite</p>
+				</div>
+				<%- 
+				include(`../files/themes/${theme_name}/components/progress.ejs`, { className: "progress progress-1", id: "progress-init" } ) 
+				-%>
+			</div>
+			<div class="quote">
+				<p>This should be fun, it's always nice to have a goal in life.</p>
 			</div>
 		</div>
 	</div>
@@ -95,5 +116,3 @@
 </body>
 
 </html>	
-
-<!--<img src="./files/themes/default/icons/global">-->

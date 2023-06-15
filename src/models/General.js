@@ -7,15 +7,17 @@ const generalSchema = new Schema({
 	},
 	password: {
 		type: String,
+		default: "admin",
 		required: true
 	},
 	theme: {
-		type: Number,
-		default: 0,
+		type: String,
+		default: "default",
 		required: true
 	},
 	defaultpage: {
 		type: Number,
+		default: 0,
 		required: true
 	},
 	setup: {

@@ -178,6 +178,7 @@ this app will need a dev section with some button to empty cache
 
 Todo:
 	Code:
+	Add the theme functionality
 	Add global cache function, check if there is size enough to store stuff like fonts (max priority), images etc
 	
 	Design:

@@ -17,6 +17,7 @@ const port = 3000;
 var lock_setup = false;
 var theme_selected = 0;
 var theme_list = [];
+var theme_name = "default";
 
 // Firewall
 
@@ -54,30 +55,21 @@ app.get("/login", (req, res) => {
 	}
 })
 
-app.get("/setup", (req, res) => {
-	if (lock_setup == true) {
-		resSetup(req, res)
-	} else {
-		resIndex(req, res)
-	}
-})
-
 function resIndex(req, res) {
-	res.render('index.ejs')
+	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name })
 }
 
 function resSetup(req, res) {
-	res.render('setup.ejs', { theme_list: theme_list })
+	res.render('setup.ejs', { theme_list: theme_list, theme_name: theme_name })
 }
 
 function resLogin(req, res) {
-	res.render('login.ejs')
+	res.render('login.ejs', { theme_list: theme_list, theme_name: theme_name })
 }
 
 // Setup
-export function beginSetup() {
-	lock_setup = true;
-}
+export function beginSetup() { lock_setup = true; }
+export function endSetup() { lock_setup = false; }
 
 // Theme
 fs.readdir(__dirname + '/files/themes', function (err, filesPath) {
@@ -86,6 +78,8 @@ fs.readdir(__dirname + '/files/themes', function (err, filesPath) {
         return filePath;
     });
 });
+
+export function changeTheme(theme) { theme_name = theme; }
 
 // Other
 app.listen(port)

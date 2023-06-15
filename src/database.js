@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const mongoURI = 'mongodb://velosuite:123456@localhost:27017/Velosuite'
-const conn = mongoose.createConnection(mongoURI);
+export const conn = mongoose.createConnection(mongoURI);
 import { generalCheck } from "./controllers/ctrl.controller.js";
 
 mongoose.connect(mongoURI, {

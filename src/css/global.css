@@ -99,3 +99,12 @@ body::-webkit-scrollbar {
     margin-left: auto;
 	position: relative;
 }
+
+@media (max-width: 570px) {
+
+.popup-message {
+    width: calc(100% - 20px) !important;
+    left: 10px !important;
+}
+
+}
