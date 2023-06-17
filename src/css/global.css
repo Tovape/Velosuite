@@ -52,6 +52,7 @@ body {
 	margin: 0;
 	font-family: var(--opensans);
 	scroll-behavior: smooth;
+	font-size: var(--norfont);
 }
 
 button, input {
@@ -61,10 +62,6 @@ button, input {
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
 	transition: background-color 600000s 0s, color 600000s 0s;
-}
-
-a,p,li {
-	font-size: ;
 }
 
 a {
@@ -82,6 +79,18 @@ li {
 ol,ul {
 	margin: 0;
 	padding-left: 20px;
+}
+
+/* Select */
+
+::selection {
+	color:var(--white-1);
+	background:var(--blue-2);
+}
+
+::-moz-selection {
+	color:var(--white-1);
+	background:var(--blue-2);
 }
 
 /* Scrollbar */

@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	calcHeight(null, true)
 });
 
+/* Slides */
 function nextSlide(dom) {
 	if (dom.getAttribute("pos") == popup_content_icon_arr.length) {
 		if (popup_inputs["username"].value == "" || popup_inputs["username"].value == null || popup_inputs["username"].value == undefined) {
@@ -60,6 +61,7 @@ function backSlide(dom) {
 	calcHeight(dom)
 }
 
+/* Height Animation */
 function calcHeight(dom, start = false) {
 	if (!start) {
 		popup.style.height = (parseInt(290) + parseInt(popup_content_active[parseInt(dom.getAttribute("pos"))].offsetHeight)) + "px";
@@ -68,6 +70,7 @@ function calcHeight(dom, start = false) {
 	}
 }
 
+/* Setup Fetch */
 function beginSetup() {
 	var query = `
 		{

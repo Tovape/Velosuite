@@ -15,11 +15,6 @@ const generalSchema = new Schema({
 		default: "default",
 		required: true
 	},
-	defaultpage: {
-		type: Number,
-		default: 0,
-		required: true
-	},
 	setup: {
         type: Boolean,
         default: false

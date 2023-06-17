@@ -3,41 +3,52 @@
 
 <head>
 	<title>Velosuite</title>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-	<!-- Fonts -->
-	<link href="../files/themes/default/fonts/OpenSansRegular.ttf" type="text/css" rel="stylesheet"> 
-	<link href="../files/themes/default/fonts/RobotoThin.ttf" type="text/css" rel="stylesheet"> 
-	<link href="../files/themes/default/fonts/PoppinsRegular.ttf" type="text/css" rel="stylesheet"> 
-	<link href="../files/themes/default/fonts/PoppinsSemiBold.ttf" type="text/css" rel="stylesheet"> 
-	<!-- Icon -->
-	<link rel="icon" href="../files/images/logo/logo-icon.svg" type="image/gif" sizes="16x16">
-	<link rel="apple-touch-icon" href="../files/images/logo/logo-icon-180.png">
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/global.css">
-	<link rel="stylesheet" type="text/css" href="../files/themes/default/css/index.css">
-	<link rel="stylesheet" type="text/css" href="../files/themes/default/components/popupmessage.css">
-	<!-- JS -->
-	<script type="text/javascript" src="../js/global.js"></script>
+	<%- 
+	include('./components/head.ejs', {theme_name: theme_name})
+	-%>
+	<!-- Index -->
+	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/navigator.ejs">
+	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/navigator.css">
+	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/css/index.css">
+	<script type="text/javascript" src="../js/index.js"></script>
+	<script type="text/javascript" src="../files/themes/<%= theme_name %>/js/index.js"></script>
 </head>
 
-<body style="background-image:url(../files/themes/<%= theme_name %>/images/background.png);">
+<body style="background-image:url(../files/themes/<%= theme_name %>/images/background_min.jpg);">
 
 <%- 
 include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
 %>
 
-<div class="nav" id="nav">
+<%- 
+include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: theme_name})
+%>
 
+<div class="pages" id="pages">
+	<div class="page-projects page-each" value="projects" id="page-projects">
+		<p>asf</p>
+	</div>
+	<div class="page-notes page-each" value="notes" id="page-notes">
+		<p>adsfasgagsas</p>
+	</div>
+	<div class="page-timeline page-each" value="timeline" id="page-timeline">
+		<p>adsagsgaas</p>
+	</div>
+	<div class="page-health page-each" value="health" id="page-health">
+		<p>adsasas</p>
+	</div>
+	<div class="page-settings page-each" value="settings" id="page-settings">
+	
+		<ul class="timeline">
+		<% for (var i = 0; i < theme_list.length; i++) { %>
+		<li class="timeline-yellow"><%= theme_list[i] %></li>
+		<% } %>
+		</ul>
+
+		<button onclick="themefun()">Trocar</button>
+
+	</div>
 </div>
-
-<ul class="timeline">
-    <% for (var i = 0; i < theme_list.length; i++) { %>
-    <li class="timeline-yellow">
-            <%= theme_list[i] %>
-    </li>
-    <% } %>
-</ul>
 
 </body>
 

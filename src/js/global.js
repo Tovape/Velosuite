@@ -3,15 +3,15 @@ var popup_message_dom = null;
 var popup_color_dom = null;
 var popup_text_dom = null;
 
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
+	console.log('%c Velosuite', 'color: #6D94DB');
+	
 	popup_message_dom = document.getElementById("popup-message")
 	popup_color_dom = document.getElementById("popup-color")
 	popup_text_dom = document.getElementById("popup-text")
 });
 
-
 // Popup Message
-
 function popupMessage(context, message) {
 	popup_message_dom.classList.toggle("popup-animation")
 	popup_text_dom.textContent = message

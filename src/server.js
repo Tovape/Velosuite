@@ -77,6 +77,10 @@ fs.readdir(__dirname + '/files/themes', function (err, filesPath) {
     theme_list = filesPath.map(function (filePath) {
         return filePath;
     });
+	if(!theme_list.includes('default')) {
+		console.log('\n' + '\x1b[31m', "Exeption: Default theme not found", '\x1b[0m')
+		process.exit(1);
+	}
 });
 
 export function changeTheme(theme) { theme_name = theme; }

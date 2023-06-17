@@ -1,0 +1,70 @@
+.button {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+	gap: 30px;
+	overflow: hidden;
+	text-transform: capitalize;
+	border-radius: 14px;
+	width: fit-content;
+	cursor: pointer;
+	padding: 16px 40px;
+	font-size: var(--norfont);
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.button > svg,
+.button > img {
+	width: auto;
+	height: 14px;
+	object-fit:contain;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.button:hover > svg,
+.button:hover > img,
+.button:hover,
+.button:active > svg,
+.button:active > img,
+.button:active {
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;	
+}
+
+.button-1 {
+	color: var(--white-1);	
+	background-color: var(--blue-2);
+}
+
+.button-1:hover {
+	color: var(--white-1);	
+	background-color: var(--blue-1);
+}
+
+.button-1:active {
+	color: var(--white-1);	
+	background-color: var(--blue-2);
+}
+
+.button-next:hover > img,
+.button-next:hover > svg {
+	transform: translateX(10px);
+}
+
+.button-next:active > img,
+.button-next:active > svg {
+	transform: translateX(100px);
+}
+
+.button-back:hover > img,
+.button-back:hover > svg {
+	transform: translateX(-10px);
+}
+
+.button-back:active > img,
+.button-back:active > svg {
+	transform: translateX(-100px);
+}
