@@ -8,6 +8,54 @@ Theme Name: Placeholder
 
 :root {
 	
-
+	/* Color Palette */
+	--white-1: #FFFFFF;
+	--black-1: #000000;
+	--gray-1: #656565;
+	--blue-1: #9DB7E7;
+	--blue-2: #6D94DB;
+	--blue-3: #3C70CF;
+	--blue-4: #0C4DC4;
 	
+	/* Font Size */
+	--bigfont: 34px;
+	--undfont: 24px;
+	--norfont: 18px;
+	--smafont: 14px;
+	--micfont: 10px;
+	
+	/* Font Size */
+	--poppins: 'Poppins', sans-serif;
+	--opensans: 'Open Sans', sans-serif;
+	--roboto: 'Roboto', sans-serif;
+}
+
+/* Global */
+
+body {
+	font-family: var(--opensans);
+	font-size: var(--norfont);
+}
+
+/* Select */
+
+::selection {
+	color:var(--white-1);
+	background:var(--blue-2);
+}
+
+::-moz-selection {
+	color:var(--white-1);
+	background:var(--blue-2);
+}
+
+/* Media Query */
+
+@media (max-width: 570px) {
+
+.popup-message {
+    width: calc(100% - 20px) !important;
+    left: 10px !important;
+}
+
 }

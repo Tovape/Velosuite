@@ -4,7 +4,7 @@ var popup_color_dom = null;
 var popup_text_dom = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
-	console.log('%c Velosuite', 'color: #6D94DB');
+	console.log('%c Velosuite', 'color: #FFFFFF');
 	
 	popup_message_dom = document.getElementById("popup-message")
 	popup_color_dom = document.getElementById("popup-color")
@@ -36,4 +36,39 @@ function popupMessage(context, message) {
 	setTimeout(function(){
 		popup_message_dom.classList.toggle("popup-animation")
 	}, 3000);
+}
+
+// Delete Localhost Storage
+function deleteLocalhost(name) {
+	if (localStorage.getItem(name)) {
+		return localStorage.removeItem(name)
+	} else {
+		return false;
+	}	
+}
+
+// Save Localhost Storage
+function saveLocalhost(data, name, type) {
+	switch(type) {
+		case "image":
+			localStorage.setItem(name, getBase64Image(data));
+			break;
+		case "weather":
+			localStorage.setItem(name, JSON.stringify(data));
+			break;
+		case "string":
+			localStorage.setItem(name, data);
+			break;
+		default:
+			return false;
+	}
+}
+
+// Load Localhost Storage
+function loadLocalhost(name) {
+	if (localStorage.getItem(name)) {
+		return localStorage.getItem(name)
+	} else {
+		return false;
+	}
 }

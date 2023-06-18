@@ -7,8 +7,6 @@
 	include('./components/head.ejs', {theme_name: theme_name})
 	-%>
 	<!-- Index -->
-	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/navigator.ejs">
-	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/navigator.css">
 	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/css/index.css">
 	<script type="text/javascript" src="../js/index.js"></script>
 	<script type="text/javascript" src="../files/themes/<%= theme_name %>/js/index.js"></script>
@@ -23,6 +21,18 @@ include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
 <%- 
 include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: theme_name})
 %>
+
+<div class="container abs">
+
+	<%- 
+	include(`../files/themes/${theme_name}/components/clock.ejs`, {theme_name: theme_name})
+	%>
+
+	<%- 
+	include(`../files/themes/${theme_name}/components/weather.ejs`, {theme_name: theme_name})
+	%>
+
+</div>
 
 <div class="pages" id="pages">
 	<div class="page-projects page-each" value="projects" id="page-projects">
@@ -45,7 +55,7 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 		<% } %>
 		</ul>
 
-		<button onclick="themefun()">Trocar</button>
+		<button onclick="themeChange()">Trocar</button>
 
 	</div>
 </div>

@@ -1,10 +1,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <!-- Fonts -->
-<link href="../files/themes/<%= theme_name %>/fonts/OpenSansRegular.ttf" type="text/css" rel="stylesheet"> 
-<link href="../files/themes/<%= theme_name %>/fonts/RobotoThin.ttf" type="text/css" rel="stylesheet"> 
-<link href="../files/themes/<%= theme_name %>/fonts/PoppinsRegular.ttf" type="text/css" rel="stylesheet"> 
-<link href="../files/themes/<%= theme_name %>/fonts/PoppinsSemiBold.ttf" type="text/css" rel="stylesheet"> 
+<%- 
+include(`../../files/themes/${theme_name}/components/fonts.ejs`)
+%>
 <!-- Icon -->
 <link rel="icon" href="../files/images/logo/logo-icon.svg" type="image/gif" sizes="16x16">
 <link rel="apple-touch-icon" href="../files/images/logo/logo-white-180.png">
@@ -16,6 +15,9 @@
 <link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/dropdown.css">
 <link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/progress.css">
 <link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/popupmessage.css">
+<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/navigator.css">
+<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/weather.css">
+<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/components/clock.css">
 <!-- JS -->
 <script type="text/javascript" src="../js/global.js"></script>
 <!-- PWA -->
