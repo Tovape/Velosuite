@@ -17,6 +17,9 @@ var today = null;
 var hr = null;
 var min = null;
 var sec = null;
+var weather_icon = null;
+var weather_temperature = null;
+var weather_phrase = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	page_each = document.querySelectorAll(".page-each")
@@ -24,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	clock_time = document.getElementById("clock-time");
 	clock_day = document.getElementById("clock-day");
 	clock_month = document.getElementById("clock-month");
+	weather_icon = document.getElementById("weather-icon");
+	weather_temperature = document.getElementById("weather-temperature");
+	weather_phrase = document.getElementById("weather-phrase");
 	
 	// Time Clock Init
 	getTime()
@@ -145,7 +151,31 @@ function getWeather(update) {
 	}
 }
 
-function parseWeather(data) {console.log(data)}
+function parseWeather(data) {
+	console.log(data)
+	switch(data.code) {
+		case 400:
+			console.log("%c Exeption: Weather Bad Request", 'color: #FF0000');
+			break;
+		case 401:
+			console.log("%c Exeption: Weather Unauthorized", 'color: #FF0000');
+			break;
+		case 404:
+			console.log("%c Exeption: Weather Not Found", 'color: #FF0000');
+			break;
+		case 429:
+			console.log("%c Exeption: Weather Too Many Requests", 'color: #FF0000');
+			break;
+		case 500:
+			console.log("%c Exeption: Weather Internal Error", 'color: #FF0000');
+			break;
+		default:
+			weather_icon.setAttribute("src", "../files/themes/default/icons/weather/" + data.daily[0].weather[0].icon + ".svg")
+			weather_temperature.textContent = data.daily[0].temp.max + "°"
+			weather_phrase.textContent = data.timezone
+			break;
+	}
+}
 
 // Time Clock
 function getTime(){

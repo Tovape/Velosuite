@@ -20,6 +20,7 @@ body {
 }
 
 .page-each {
+	background-color: var(--white-1);
 	position: absolute;
 	z-index: 1;
 	width: 30%;
@@ -45,9 +46,3 @@ body {
 .page-each.index {
 	z-index:2;
 }
-
-.page-each.page-projects {background-color: var(--white-1);}
-.page-each.page-notes {background-color: red;}
-.page-each.page-settings {background-color: blue;}
-.page-each.page-timeline {background-color: yellow;}
-.page-each.page-health {background-color: green;}
