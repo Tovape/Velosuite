@@ -17,9 +17,12 @@ var today = null;
 var hr = null;
 var min = null;
 var sec = null;
+var weather = null;
 var weather_icon = null;
 var weather_temperature = null;
-var weather_phrase = null;
+var weather_wind = null;
+var	weather_humidity = null;
+var weather_precipitation = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	page_each = document.querySelectorAll(".page-each")
@@ -27,9 +30,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	clock_time = document.getElementById("clock-time");
 	clock_day = document.getElementById("clock-day");
 	clock_month = document.getElementById("clock-month");
+	weather = document.getElementById("weather");
 	weather_icon = document.getElementById("weather-icon");
 	weather_temperature = document.getElementById("weather-temperature");
-	weather_phrase = document.getElementById("weather-phrase");
+	weather_wind = document.getElementById("weather-wind");
+	weather_humidity = document.getElementById("weather-humidity");
+	weather_precipitation = document.getElementById("weather-precipitation");
 	
 	// Time Clock Init
 	getTime()
@@ -49,6 +55,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	} else {
 		console.log("%c Exeption: Does not have access to weather location", 'color: #FF0000');
 	}
+	
+	temp = today.getHours();
+
+	if (temp >= 21 || temp <= 5) {
+		weather.classList.toggle("night")
+	} else if (temp >= 6 || temp < 21) {
+		weather.classList.toggle("day")
+	}
 
 	// Pages/Nav Init
 	if (!((page_each.length + 1) == navigator_each.length)) {
@@ -61,7 +75,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			temp = navigator_each[i].getAttribute("value")
 			if (!(page_active == temp)) {
 				page_active = temp
-				togglePage(temp, true)
+				togglePage(temp)
+			} else {
+				page_active = "home"
+				page_last = temp
+				togglePage("home")
 			}
 		});
 	}
@@ -171,8 +189,10 @@ function parseWeather(data) {
 			break;
 		default:
 			weather_icon.setAttribute("src", "../files/themes/default/icons/weather/" + data.daily[0].weather[0].icon + ".svg")
-			weather_temperature.textContent = data.daily[0].temp.max + "°"
-			weather_phrase.textContent = data.timezone
+			weather_temperature.textContent = (data.daily[0].temp.max).toFixed(1).replace('.0', '') + "°"
+			weather_wind.innerHTML = (data.daily[0].wind_speed).toFixed(1).replace('.0', '') + "<span>km/h</span>"
+			weather_humidity.innerHTML = (data.daily[0].humidity).toFixed(1).replace('.0', '') + "<span>%</span>"
+			weather_precipitation.innerHTML = (data.daily[0].pop).toFixed(1).replace('.0', '') + "<span>%</span>"
 			break;
 	}
 }

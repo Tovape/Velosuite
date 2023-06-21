@@ -68,12 +68,12 @@ body::-webkit-scrollbar {
     margin: 0 40px;
 }
 
-.container.abs {
-	position:absolute;
-	height: calc(100% - 48px);
+@media (max-width: 768px) {
+
+.container {
+    max-width: 1800px;
+	width: calc(100% - 40px);
+    margin: 0 20px;
 }
 
-.container.rel {
-	position:relative;
-	height: fit-Content;
 }

@@ -30,3 +30,25 @@
 	color: var(--black-1);
 	line-height: 1;
 }
+
+@media (max-width: 768px) {
+
+.clock #clock-time {
+    font-size: 80px;
+}
+
+.clock #clock-day {
+    font-size: var(--norfont);
+}
+
+.clock #clock-month {
+    font-size: var(--norfont);
+}
+
+.clock {
+	top: 0;
+	position: relative;
+	align-items: flex-start;
+}
+
+}

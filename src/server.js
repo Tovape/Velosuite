@@ -1,8 +1,8 @@
 import express from "express";
-import "./database.js";
 import noteRoutes from "./routes/note.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import ctrlRoutes from "./routes/ctrl.routes.js";
+import { generalCheck } from "./controllers/ctrl.controller.js";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import path from "path";
@@ -18,6 +18,7 @@ var lock_setup = false;
 var theme_selected = 0;
 var theme_list = [];
 var theme_name = "default";
+var general = null;
 
 // Firewall
 
@@ -67,6 +68,26 @@ function resLogin(req, res) {
 	res.render('login.ejs', { theme_list: theme_list, theme_name: theme_name })
 }
 
+// Database JSON
+export function loadGeneral() {
+	try {
+		general = JSON.parse(fs.readFileSync('./content/general.json'))
+	} catch (err) {
+		console.log('\n' +  '\x1b[31m', "Exeption: Couldn't load General.json" + '\x1b[0m');
+		general = null;
+	}
+}
+
+export function getGeneral() {
+	return general;
+}
+
+export function writeGeneral(data) {
+	fs.writeFileSync('./content/general.json', JSON.stringify(data));
+}
+
+loadGeneral()
+
 // Setup
 export function beginSetup() { lock_setup = true; }
 export function endSetup() { lock_setup = false; }
@@ -97,3 +118,7 @@ console.log(`
 `);
 console.log('\t' +  '\x1b[36m', 'Server Port ' + port + '\x1b[0m')
 console.log('\t' +  '\x1b[33m', 'Version ' + packagejson.version + '\x1b[0m')
+if (general !== null) {
+	console.log('\t' +  '\x1b[32m', 'Data Loaded' + '\x1b[0m' + '\n\n');
+	generalCheck(general)
+}

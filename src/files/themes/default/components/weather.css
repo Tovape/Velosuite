@@ -1,34 +1,76 @@
 .weather {
-position: absolute;
+	position: absolute;
     top: 50px;
     right: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
 	gap: 20px;
-    padding: 40px;
-    background-color: rgba(255,255,255,0.4);
+    padding: 20px;
     border-radius: 14px;
     backdrop-filter: blur(5px);
 }
 
-.weather:hover {
-
+.weather.night {
+	background-color: rgba(0,0,0,0.4);
 }
 
-.weather > div {
-	display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
+.weather.day {
+    background-color: rgba(255,255,255,0.4);
+}
+
+.weather .weather-spec-value {
+	font-size:var(--norfont);
+	font-weight: 500;
+}
+
+.weather .weather-spec-value > span {
+	font-size:var(--micfont);
+}
+
+.weather.night .weather-spec-value {
+	color: var(--white-1);
+}
+
+.weather .weather-spec-title {
+	font-size:var(--micfont);
+}
+
+.weather.night .weather-spec-title {
+	color: #bdbdbd;
 }
 
 .weather #weather-temperature {
 	font-family: var(--roboto);
 	font-size: 60px;
 	font-weight: 100;
-	color: var(--white-1);
 	line-height: 1;
+}
+
+.weather.night #weather-temperature {
+	color: var(--white-1);
+}
+
+.weather .weather-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.weather .weather-spec {
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.weather .weather-spec > div {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .weather #weather-icon {
@@ -37,10 +79,37 @@ position: absolute;
 	object-fit:contain;
 }
 
+@media (max-width: 768px) {
+
+.weather {
+	position: relative;
+    align-items: flex-end;
+	flex-direction: row;
+	flex-wrap: wrap;
+    justify-content: space-between;
+	width: 100%;
+	top: 0;
+	gap: 10px;
+	backdrop-filter: unset;
+	background-color: transparent;
+}
+
 .weather #weather-phrase {
-	font-family: var(--montserrat);
-	font-size: var(--norfont);
-	font-weight: 400;
-	color: var(--white-1);
+	font-family: var(--roboto);
+	font-weight: 300;
+}
+
+.weather #weather-temperature {
+    font-size: 40px;
+}
+
+.weather #weather-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.weather .weather-main {
+	flex-direction: row-reverse;
+}
 
 }

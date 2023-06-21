@@ -81,3 +81,57 @@
 	color:transparent !important;
 	background:transparent !important;
 }
+
+@media (max-width: 768px) {
+
+.nav {
+	background-color: unset;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0;
+	padding: 20px;
+	height: fit-Content;
+}
+
+.nav .nav-each {
+	border-radius: 14px;
+    padding: 10px;
+}
+
+.nav .nav-each {
+	background-color: var(--white-1);
+}
+
+.nav .nav-each:not(.active):hover{
+    background-color: #d1d1d1;
+}
+
+.nav .nav-each.active::before {display: none;}
+
+.nav .nav-each:not(.active) img {
+    filter: unset;
+}
+
+.nav .nav-settings {
+	display: none;
+}
+
+.nav > div:first-child {
+	flex-wrap: wrap;
+    gap: 20px;
+	justify-content: center;
+}
+
+}
+
+@media (max-width: 380px) {
+	
+.nav > div:first-child {
+    gap: 10px;
+}
+
+.nav .nav-each {
+	width: calc(25% - 23px);
+}
+	
+}

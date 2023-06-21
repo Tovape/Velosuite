@@ -1,4 +1,3 @@
-import Post from "../models/Note.js";
 import jwt from "jsonwebtoken";
 
 /* GET - Get Note */

@@ -46,3 +46,31 @@ body {
 .page-each.index {
 	z-index:2;
 }
+
+.container.home {
+	position:absolute;
+	height: calc(100% - 48px);
+}
+
+@media (max-width: 768px) {
+
+body {
+    background-position: left center;
+}
+
+.container.home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	justify-content: space-between;
+    gap: 70px;
+	height: calc(100% - 110px);
+    margin-top: 20px;
+    margin-bottom: 90px;
+}
+
+.pages {
+	height: 100%;
+}
+
+}
