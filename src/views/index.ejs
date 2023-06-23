@@ -36,27 +36,29 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 
 <div class="pages" id="pages">
 	<div class="page-projects page-each" value="projects" id="page-projects">
-		<p>asf</p>
+		<%- 
+		include(`../files/themes/${theme_name}/pages/projects.ejs`, {theme_name: theme_name})
+		%>
 	</div>
 	<div class="page-notes page-each" value="notes" id="page-notes">
-		<p>adsfasgagsas</p>
+		<%- 
+		include(`../files/themes/${theme_name}/pages/notes.ejs`, {theme_name: theme_name})
+		%>
 	</div>
 	<div class="page-timeline page-each" value="timeline" id="page-timeline">
-		<p>adsagsgaas</p>
+		<%- 
+		include(`../files/themes/${theme_name}/pages/timeline.ejs`, {theme_name: theme_name})
+		%>
 	</div>
 	<div class="page-health page-each" value="health" id="page-health">
-		<p>adsasas</p>
+		<%- 
+		include(`../files/themes/${theme_name}/pages/health.ejs`, {theme_name: theme_name})
+		%>
 	</div>
 	<div class="page-settings page-each" value="settings" id="page-settings">
-	
-		<ul class="timeline">
-		<% for (var i = 0; i < theme_list.length; i++) { %>
-		<li class="timeline-yellow"><%= theme_list[i] %></li>
-		<% } %>
-		</ul>
-
-		<button onclick="themeChange()">Trocar</button>
-
+		<%- 
+		include(`../files/themes/${theme_name}/pages/settings.ejs`, {theme_name: theme_name, theme_list: theme_list})
+		%>
 	</div>
 </div>
 

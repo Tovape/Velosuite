@@ -1,0 +1,48 @@
+<div class="page-container container">
+	<h1>Settings</h1>
+	<div>
+		<div class="page-nav">
+			<p value="home" pos="0" class="active">Home</p>
+			<p value="notes" pos="1">Notes</p>
+			<p value="projects" pos="2">Projects</p>
+			<p value="health" pos="3">Health</p>
+			<p value="timeline" pos="4">Timeline</p>
+			<p value="themes" pos="5">Themes</p>
+		</div>
+		<div class="page-content">
+			<div class="page-content-each active" value="home">
+				<p>a</p>
+			</div>
+			<div class="page-content-each" value="notes">
+				<p>aa</p>
+			</div>
+			<div class="page-content-each" value="projects">
+				<p>aaa</p>
+			</div>
+			<div class="page-content-each" value="health">
+			</div>
+			<div class="page-content-each" value="timeline">
+			</div>
+			<div class="page-content-each" value="themes">
+				<div>
+					<h2>Active Theme</h2>
+					<p>To install themes, download one from the <a href="#">theme explorer</a> and drag the folder to Velosuite/src/files/themes/</p>
+					<div>
+						<%- 
+						include(`../components/selection.ejs`, { list: theme_list, className: "selection selection-1", name: "theme-active", ldefault: theme_name } ) 
+						-%>
+						<%- 
+						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "themeChange()" } ) 
+						-%>
+					</div>
+				</div>
+				<div>
+					<h2>Al Theme</h2>
+					<div>
+					<p>asfno</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

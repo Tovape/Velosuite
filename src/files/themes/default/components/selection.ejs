@@ -1,0 +1,8 @@
+<div class="<%= className %>">
+<% for (var i = 0; i < list.length; i++) { %>
+	<div class="selection-each">
+		<input id="<%= list[i] %>" value="<%= list[i] %>" name="<%= name %>" type="radio" <% if (ldefault == list[i]) { %> checked <% } %>>
+		<label for="<%= name %>"><%= list[i] %></label>
+	</div>
+<% } %>
+</div>

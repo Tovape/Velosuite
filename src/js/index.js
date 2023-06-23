@@ -1,13 +1,16 @@
 // Global Variables
+
 var temp = null;
+
+/* Page Navigation */
+
 var page_each = null;
 var navigator_each = null;
 var page_last = null;
 var page_active = "home";
-var weather_apiKey = "0c6c7437dc3965467da9bf26b092f8d2";
-var weather_lat = null;
-var weather_lon = null;
-var weather_apiUrl = null;
+
+/* Clock */
+
 const month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const day_names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var clock_time = null;
@@ -16,7 +19,13 @@ var clock_month = null;
 var today = null;
 var hr = null;
 var min = null;
-var sec = null;
+
+/* Weather */
+
+var weather_apiKey = "0c6c7437dc3965467da9bf26b092f8d2";
+var weather_lat = null;
+var weather_lon = null;
+var weather_apiUrl = null;
 var weather = null;
 var weather_icon = null;
 var weather_temperature = null;
@@ -24,7 +33,16 @@ var weather_wind = null;
 var	weather_humidity = null;
 var weather_precipitation = null;
 
+/* Settings */
+
+var settings_nav = null;
+var settings_page_each = null;
+var settings_page_last = null;
+var settings_page_active = "home";
+
 document.addEventListener("DOMContentLoaded", function(event) {
+	settings_nav = document.querySelectorAll(".page-settings .page-nav > p")
+	settings_page_each = document.querySelectorAll(".page-settings .page-content-each")
 	page_each = document.querySelectorAll(".page-each")
 	navigator_each = document.querySelectorAll(".nav-each")
 	clock_time = document.getElementById("clock-time");
@@ -83,6 +101,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 		});
 	}
+	
+	// Settings Page
+	for(let i = 0; i < settings_nav.length; i++) {
+		settings_nav[i].addEventListener("click", function() {
+			settings_page_last = settings_page_active
+			temp = settings_nav[i].getAttribute("value")
+			if (!(settings_page_active == temp)) {
+				settings_page_active = temp
+				document.querySelector(".page-settings .page-nav > p.active").classList.remove("active")
+				document.querySelector(".page-settings .page-nav > p[value='" + temp + "']").classList.add("active")
+				
+				document.querySelector(".page-settings .page-content .page-content-each.active").classList.remove("active")
+				document.querySelector(".page-settings .page-content .page-content-each[value='" + temp + "']").classList.add("active")
+				
+				temp = settings_nav[i].getAttribute("pos")
+				document.querySelector(".page-settings .page-nav").style.setProperty("--top", (parseInt(temp) * (56)) + "px")
+			}
+		});
+	}
 });
 
 // Toggle Page
@@ -108,10 +145,11 @@ function togglePage(page) {
 
 // Change Theme Fetch
 function themeChange() {
+	var theme = document.querySelector(".selection input[name=theme-active]:checked").value
 	console.log("%c Info: Changing Theme", 'color: #6D94DB');
 	var query = `
 		{
-			"theme": "default"
+			"theme": "` + theme + `"
 		}
 	`;
 	fetch("http://localhost:3000/api/ctrl/changeTheme", {
@@ -170,7 +208,6 @@ function getWeather(update) {
 }
 
 function parseWeather(data) {
-	console.log(data)
 	switch(data.code) {
 		case 400:
 			console.log("%c Exeption: Weather Bad Request", 'color: #FF0000');

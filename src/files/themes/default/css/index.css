@@ -20,7 +20,7 @@ body {
 }
 
 .page-each {
-	background-color: var(--white-1);
+	background-color: var(--white-2);
 	position: absolute;
 	z-index: 1;
 	width: 30%;
@@ -50,6 +50,116 @@ body {
 .container.home {
 	position:absolute;
 	height: calc(100% - 48px);
+}
+
+.page-container {
+	display: flex;
+    flex-direction: column;
+	gap: 60px;
+	margin: 60px auto 0 auto;
+}
+
+.page-container h1 {
+	line-height: 1;
+	font-size:60px;
+	font-weight: 600;
+	font-family: var(--poppins);
+}
+
+.page-container > div {
+	display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.page-container .page-nav {
+	--top: 0;
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	position: relative;
+}
+
+.page-container .page-nav::before {
+	content:"";
+	border-radius: 6px;
+	left: 0;
+	top: calc(var(--top) + 10px);
+	height: 36px;
+	width: 3px;
+	position: absolute;
+	background-color: var(--blue-1);
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-container .page-nav > p {
+    padding: 10px 30px;
+	font-family: var(--poppins);
+	font-size:var(--undfont);
+	background-color: transparent;
+	display: flex;
+    align-items: center;
+	cursor:pointer;
+	height: 56px;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-container .page-nav > p.active {
+	color: var(--blue-2);
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-container .page-content {
+	background-color: var(--white-1);
+	border-radius: 14px;
+	width: 100%;
+	height: 100%;
+	padding: 30px;
+}
+
+.page-container .page-content-each {
+	display: none;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.page-container .page-content-each > div {
+	display: flex;
+	flex-direction: column;
+}
+
+.page-container .page-content-each > div > h2 {
+	font-family: var(--poppins);
+	font-size:var(--bigfont);	
+}
+
+.page-container .page-content-each > div > p {
+	font-family: var(--poppins);
+	font-size:var(--norfont);	
+	color: var(--gray-1);
+}
+
+.page-container .page-content-each > div > p > a {
+	color: var(--blue-2);
+	display: inline-block;
+}
+
+.page-container .page-content-each > div > div {
+	background-color: var(--white-2);
+	border-radius: 14px;
+	width: 100%;
+	padding: 30px;
+	margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.page-container .page-content-each.active {
+	display: flex;
 }
 
 @media (max-width: 768px) {
