@@ -7,7 +7,7 @@ This app is for discipline and organizing life, for a more productive oriented a
 Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | NodeJS | PWA
+HTML | CSS | JS | NodeJS | PWA | Tiny Markdown
 
 Desirable Environment:
 Raspberry Pi 3/Linux/Windows

@@ -18,6 +18,8 @@ var lock_setup = false;
 var theme_selected = 0;
 var theme_list = [];
 var theme_name = "default";
+var weather_selected = "celsius";
+var weather_units = ["celsius", "fahrenheit"]
 var general = null;
 
 // Firewall
@@ -57,7 +59,7 @@ app.get("/login", (req, res) => {
 })
 
 function resIndex(req, res) {
-	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name })
+	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name, weather_units: weather_units, weather_selected: weather_selected })
 }
 
 function resSetup(req, res) {
@@ -105,6 +107,9 @@ fs.readdir(__dirname + '/files/themes', function (err, filesPath) {
 });
 
 export function changeTheme(theme) { theme_name = theme; }
+
+// Weather
+export function changeWeather(weather) { weather_selected = weather; }
 
 // Other
 app.listen(port)

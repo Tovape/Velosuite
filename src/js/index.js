@@ -65,9 +65,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	// Weather Init
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
+			temp = document.getElementById("weather-units").getAttribute("value")
+			if (temp == "celsius") {
+				temp = "metric"
+			} else if (temp == "fahrenheit") {
+				temp = "imperial"
+			} else {
+				temp = "metric"
+			}
+		
 			weather_lat = position.coords.latitude;
 			weather_lon = position.coords.longitude;
-			weather_apiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=" + weather_lat + "&lon=" +  weather_lon + "&units=metric&exclude=hourly,minutely,current&lang=en&appid=" + weather_apiKey;
+			weather_apiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=" + weather_lat + "&lon=" +  weather_lon + "&units=" + temp + "&exclude=hourly,minutely,current&lang=en&appid=" + weather_apiKey;
 			getWeather(false)
 		});
 	} else {
@@ -93,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			temp = navigator_each[i].getAttribute("value")
 			if (!(page_active == temp)) {
 				page_active = temp
+				loadPageContent(temp)
 				togglePage(temp)
 			} else {
 				page_active = "home"
@@ -101,6 +111,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 		});
 	}
+	
+	// Notes Page
 	
 	// Settings Page
 	for(let i = 0; i < settings_nav.length; i++) {
@@ -161,11 +173,11 @@ function themeChange() {
 		body: query
 	}).then(response => {
 		if (!response.ok) {
-			popupMessage(2, "Theme Error")	
+			popupMessage(2, "Theme Error")
 		}
 		return response.json()
 	}).then(data => {
-		console.log(data)
+		popupMessage(0, "Theme Changed")
 		if (data.status == 0) {
 			setTimeout(function(){
 				location.reload();
@@ -234,6 +246,39 @@ function parseWeather(data) {
 	}
 }
 
+// Change Weather Fetch
+function weatherChange() {
+	var weather = document.querySelector(".selection input[name=weather-active]:checked").value
+	console.log("%c Info: Changing Weather", 'color: #6D94DB');
+	var query = `
+		{
+			"units": "` + weather + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/ctrl/changeWeather", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		if (!response.ok) {
+			popupMessage(2, "Weather Error")
+		}
+		return response.json()
+	}).then(data => {
+		popupMessage(0, "Weather Changed")
+		if (data.status == 0) {
+			deleteLocalhost("weather_data")
+			deleteLocalhost("weather_timestamp")
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
+		}
+	})
+}
+
 // Time Clock
 function getTime(){
 	today = new Date();
@@ -248,4 +293,17 @@ function getTime(){
 	}
 
 	clock_time.textContent = hr + ":" + min;
+}
+
+// Load Page Content
+function loadPageContent(page) {
+	
+	setTimeout(function(){
+		console.log("SQU STOP")
+	}, 1000);
+}
+
+// New Note
+function newNote() {
+	
 }

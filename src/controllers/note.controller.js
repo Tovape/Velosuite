@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 /* GET - Get Note */
 
-export const getNote = async (req, res) => {
+export const getNotes = async (req, res) => {
 
 }
 

@@ -4,5 +4,6 @@ const router = Router();
 
 router.post("/", ctrlController.ctrlSetup)
 router.post("/changeTheme", ctrlController.ctrlThemeChange)
+router.post("/changeWeather", ctrlController.ctrlWeatherChange)
 
 export default router;

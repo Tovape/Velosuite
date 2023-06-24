@@ -45,6 +45,11 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 		include(`../files/themes/${theme_name}/pages/notes.ejs`, {theme_name: theme_name})
 		%>
 	</div>
+	<div class="page-notes page-each" value="tasks" id="page-tasks">
+		<%- 
+		include(`../files/themes/${theme_name}/pages/tasks.ejs`, {theme_name: theme_name})
+		%>
+	</div>
 	<div class="page-timeline page-each" value="timeline" id="page-timeline">
 		<%- 
 		include(`../files/themes/${theme_name}/pages/timeline.ejs`, {theme_name: theme_name})
@@ -57,9 +62,13 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 	</div>
 	<div class="page-settings page-each" value="settings" id="page-settings">
 		<%- 
-		include(`../files/themes/${theme_name}/pages/settings.ejs`, {theme_name: theme_name, theme_list: theme_list})
+		include(`../files/themes/${theme_name}/pages/settings.ejs`, {theme_name: theme_name, theme_list: theme_list, weather_units: weather_units })
 		%>
 	</div>
+</div>
+
+<div style="display:none;">
+	<p value="<%= weather_selected %>" id="weather-units"></p>
 </div>
 
 </body>

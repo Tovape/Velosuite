@@ -1,4 +1,4 @@
-import { beginSetup, endSetup, changeTheme, loadGeneral, writeGeneral, getGeneral } from "../server.js";
+import { beginSetup, endSetup, changeTheme, loadGeneral, writeGeneral, getGeneral, changeWeather } from "../server.js";
 
 /* Setup Check */
 
@@ -20,6 +20,7 @@ export const ctrlSetup = async (req, res) => {
 		"username": req.body.username,
 		"password": "",
 		"theme": "default",
+		"weather": "celsius",
 		"setup": true		
 	}
 
@@ -46,4 +47,22 @@ export const ctrlThemeChange = async (req, res) => {
 	changeTheme(req.body.theme)
 	
 	return res.status(200).json({message: "Theme Changed", status: 0})
+}
+
+/* Weather Units Change */
+
+export const ctrlWeatherChange = async (req, res) => {
+	if (!req.body.units) {
+		return res.status(403).json({message: "No units provided", status: 1})
+	}
+	
+	var data = getGeneral();
+	
+	data.weather = req.body.units
+	
+	writeGeneral(data)
+	loadGeneral()
+	changeWeather(req.body.units)
+	
+	return res.status(200).json({message: "Weather Units Changed", status: 0})
 }

@@ -57,6 +57,8 @@ body {
     flex-direction: column;
 	gap: 60px;
 	margin: 60px auto 0 auto;
+	height: 100%;
+	overflow: hidden;
 }
 
 .page-container h1 {
@@ -66,21 +68,65 @@ body {
 	font-family: var(--poppins);
 }
 
-.page-container > div {
+.page-container > div.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-container > div.content {
+	height: 100%;
+    overflow: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	padding-bottom: 68px;
+}
+
+.page-container > div.content::-webkit-scrollbar {
+	display: none;
+}
+
+/* Notes Page */
+
+.page-notes .content {
+	display: grid;
+    grid-auto-rows: 230px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.page-notes .content .note-each {
+	border-radius: 14px;
+	cursor: pointer;
+	padding: 18px;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.page-notes .content .note-each .title,
+.page-notes .content .note-each .date {
+	font-family: var(--poppins);
+}
+
+/* Settings Page */
+
+.page-settings .content {
 	display: flex;
     flex-direction: row;
     gap: 60px;
 }
 
-.page-container .page-nav {
-	--top: 0;
+.page-settings .page-container .page-nav {
+	--top: 0px;
 	display: flex;
     flex-direction: column;
     align-items: flex-start;
 	position: relative;
 }
 
-.page-container .page-nav::before {
+.page-settings .page-container .page-nav::before {
 	content:"";
 	border-radius: 6px;
 	left: 0;
@@ -93,7 +139,7 @@ body {
 	-webkit-transition: all 0.25s ease-in-out;
 }
 
-.page-container .page-nav > p {
+.page-settings .page-container .page-nav > p {
     padding: 10px 30px;
 	font-family: var(--poppins);
 	font-size:var(--undfont);
@@ -101,18 +147,19 @@ body {
 	display: flex;
     align-items: center;
 	cursor:pointer;
+	width: 100%;
 	height: 56px;
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;
 }
 
-.page-container .page-nav > p.active {
+.page-settings .page-container .page-nav > p.active {
 	color: var(--blue-2);
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;
 }
 
-.page-container .page-content {
+.page-settings .page-container .page-content {
 	background-color: var(--white-1);
 	border-radius: 14px;
 	width: 100%;
@@ -120,34 +167,34 @@ body {
 	padding: 30px;
 }
 
-.page-container .page-content-each {
+.page-settings .page-container .page-content-each {
 	display: none;
 	flex-direction: column;
 	gap: 30px;
 }
 
-.page-container .page-content-each > div {
+.page-settings .page-container .page-content-each > div {
 	display: flex;
 	flex-direction: column;
 }
 
-.page-container .page-content-each > div > h2 {
+.page-settings .page-container .page-content-each > div > h2 {
 	font-family: var(--poppins);
 	font-size:var(--bigfont);	
 }
 
-.page-container .page-content-each > div > p {
+.page-settings .page-container .page-content-each > div > p {
 	font-family: var(--poppins);
 	font-size:var(--norfont);	
 	color: var(--gray-1);
 }
 
-.page-container .page-content-each > div > p > a {
+.page-settings .page-container .page-content-each > div > p > a {
 	color: var(--blue-2);
 	display: inline-block;
 }
 
-.page-container .page-content-each > div > div {
+.page-settings .page-container .page-content-each > div > div {
 	background-color: var(--white-2);
 	border-radius: 14px;
 	width: 100%;
@@ -158,7 +205,7 @@ body {
     gap: 20px;
 }
 
-.page-container .page-content-each.active {
+.page-settings .page-container .page-content-each.active {
 	display: flex;
 }
 
@@ -168,12 +215,16 @@ body {
     background-position: left center;
 }
 
+.page-container h1 {
+    font-size: var(--bigfont);
+}
+
 .container.home {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-	justify-content: space-between;
-    gap: 70px;
+	justify-content: flex-start;
+    gap: 30px;
 	height: calc(100% - 110px);
     margin-top: 20px;
     margin-bottom: 90px;
@@ -181,6 +232,24 @@ body {
 
 .pages {
 	height: 100%;
+}
+
+}
+
+@media (max-width: 500px) {
+
+.page-notes .content {
+    grid-auto-rows: 180px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+	margin-bottom: 20px;
+	height: calc(100% - 40px);
 }
 
 }

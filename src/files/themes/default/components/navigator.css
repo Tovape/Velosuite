@@ -25,6 +25,7 @@
     align-items: center;
     justify-content: center;
 	cursor:pointer;
+	min-width: 50px;
 	position:relative;
 	background-color:transparent;
 	transition: all 0.25s ease-in-out;
@@ -126,12 +127,17 @@
 
 @media (max-width: 380px) {
 	
+.nav {
+	padding: 20px 0;
+}
+	
 .nav > div:first-child {
     gap: 10px;
 }
 
 .nav .nav-each {
-	width: calc(25% - 23px);
+	width: calc(16% - 9px);
+	min-width: unset;
 }
 	
 }

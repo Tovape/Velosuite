@@ -1,23 +1,40 @@
 <div class="page-container container">
-	<h1>Settings</h1>
-	<div>
+	<div class="header">
+		<h1>Settings</h1>
+		<div>
+		
+		</div>
+	</div>
+	<div class="content">
 		<div class="page-nav">
 			<p value="home" pos="0" class="active">Home</p>
-			<p value="notes" pos="1">Notes</p>
-			<p value="projects" pos="2">Projects</p>
-			<p value="health" pos="3">Health</p>
-			<p value="timeline" pos="4">Timeline</p>
-			<p value="themes" pos="5">Themes</p>
+			<p value="weather" pos="1">Weather</p>
+			<p value="notes" pos="2">Notes</p>
+			<p value="projects" pos="3">Projects</p>
+			<p value="health" pos="4">Health</p>
+			<p value="timeline" pos="5">Timeline</p>
+			<p value="themes" pos="6">Themes</p>
 		</div>
 		<div class="page-content">
 			<div class="page-content-each active" value="home">
-				<p>a</p>
+				
+			</div>
+			<div class="page-content-each" value="weather">
+				<div>
+					<h2>Weather Units</h2>
+					<div>
+						<%- 
+						include(`../components/selection.ejs`, { list: weather_units, className: "selection selection-1", name: "weather-active", ldefault: weather_selected } ) 
+						-%>
+						<%- 
+						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "weatherChange()" } ) 
+						-%>
+					</div>
+				</div>
 			</div>
 			<div class="page-content-each" value="notes">
-				<p>aa</p>
 			</div>
 			<div class="page-content-each" value="projects">
-				<p>aaa</p>
 			</div>
 			<div class="page-content-each" value="health">
 			</div>
@@ -35,11 +52,6 @@
 						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "themeChange()" } ) 
 						-%>
 					</div>
-				</div>
-				<div>
-					<h2>Al Theme</h2>
-					<div>
-					<p>asfno</p>
 				</div>
 			</div>
 		</div>
