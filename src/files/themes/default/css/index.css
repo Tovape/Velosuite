@@ -47,6 +47,55 @@ body {
 	z-index:2;
 }
 
+.page-each .overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+    left: 0;
+	position: absolute;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 3;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-each .overlay.active{
+	visibility: visible;
+	opacity: 1;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-each .overlay .content {
+	width: 750px;
+	height: 650px;
+	padding: 40px;
+	background-color:var(--white-1);
+	border-radius:14px;
+	position: relative;
+	z-index: 3;
+}
+
+.page-each .overlay .content .title {
+	font-size:var(--bigfont);
+	font-weight: 600;
+	font-family: var(--poppins);
+}
+
+.page-each .overlay .background {
+	background-color: rgba(0,0,0,0.7);
+	height: 100%;
+	width: 100%;
+	top: 0;
+    left: 0;
+	position: absolute;
+	z-index: 2;
+}
+
 .container.home {
 	position:absolute;
 	height: calc(100% - 48px);
@@ -57,8 +106,9 @@ body {
     flex-direction: column;
 	gap: 60px;
 	margin: 60px auto 0 auto;
-	height: 100%;
+	height: calc(100% - 60px);
 	overflow: hidden;
+	position: relative;
 }
 
 .page-container h1 {
@@ -74,12 +124,18 @@ body {
     justify-content: space-between;
 }
 
+.page-container > div.header > div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
 .page-container > div.content {
 	height: 100%;
     overflow: scroll;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	padding-bottom: 68px;
 }
 
 .page-container > div.content::-webkit-scrollbar {
@@ -103,6 +159,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+.page-notes .content .note-each.hide {
+	display: none;
 }
 
 .page-notes .content .note-each .title,
@@ -232,6 +292,10 @@ body {
 
 .pages {
 	height: 100%;
+}
+
+.page-container > div.content {
+    padding-bottom: 68px;
 }
 
 }

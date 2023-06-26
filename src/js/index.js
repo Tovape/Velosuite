@@ -1,16 +1,14 @@
-// Global Variables
-
+/* Global Variables */
 var temp = null;
+var temp2 = null;
 
 /* Page Navigation */
-
 var page_each = null;
 var navigator_each = null;
 var page_last = null;
 var page_active = "home";
 
 /* Clock */
-
 const month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const day_names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var clock_time = null;
@@ -21,7 +19,6 @@ var hr = null;
 var min = null;
 
 /* Weather */
-
 var weather_apiKey = "0c6c7437dc3965467da9bf26b092f8d2";
 var weather_lat = null;
 var weather_lon = null;
@@ -32,15 +29,21 @@ var weather_temperature = null;
 var weather_wind = null;
 var	weather_humidity = null;
 var weather_precipitation = null;
+var weather_graph = null;
+
+/* Notes */
+var notes_each = null;
+var notes_filter = null
 
 /* Settings */
-
 var settings_nav = null;
 var settings_page_each = null;
 var settings_page_last = null;
 var settings_page_active = "home";
 
 document.addEventListener("DOMContentLoaded", function(event) {
+	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
+	notes_each = document.querySelectorAll(".page-notes .note-each")
 	settings_nav = document.querySelectorAll(".page-settings .page-nav > p")
 	settings_page_each = document.querySelectorAll(".page-settings .page-content-each")
 	page_each = document.querySelectorAll(".page-each")
@@ -54,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	weather_wind = document.getElementById("weather-wind");
 	weather_humidity = document.getElementById("weather-humidity");
 	weather_precipitation = document.getElementById("weather-precipitation");
+	weather_graph = document.getElementById("weather-graph");
 	
 	// Time Clock Init
 	getTime()
@@ -82,14 +86,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	} else {
 		console.log("%c Exeption: Does not have access to weather location", 'color: #FF0000');
 	}
-	
-	temp = today.getHours();
-
-	if (temp >= 21 || temp <= 5) {
-		weather.classList.toggle("night")
-	} else if (temp >= 6 || temp < 21) {
-		weather.classList.toggle("day")
-	}
 
 	// Pages/Nav Init
 	if (!((page_each.length + 1) == navigator_each.length)) {
@@ -112,8 +108,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 	
-	// Notes Page
-	
 	// Settings Page
 	for(let i = 0; i < settings_nav.length; i++) {
 		settings_nav[i].addEventListener("click", function() {
@@ -129,6 +123,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				
 				temp = settings_nav[i].getAttribute("pos")
 				document.querySelector(".page-settings .page-nav").style.setProperty("--top", (parseInt(temp) * (56)) + "px")
+			}
+		});
+	}
+	
+	// Notes Filter
+	for(let i = 0; i < notes_filter.length; i++) {
+		notes_filter[i].addEventListener("click", function() {
+			temp = notes_filter[i].getAttribute("value")
+			for (let j = 0; j < notes_each.length; j++) {
+				if (temp == "All") {
+					notes_each[j].classList.remove("hide")
+				} else if (temp == notes_each[j].getAttribute("category")) {
+					notes_each[j].classList.remove("hide")
+				} else {
+					notes_each[j].classList.add("hide")
+				}
 			}
 		});
 	}
@@ -237,14 +247,62 @@ function parseWeather(data) {
 			console.log("%c Exeption: Weather Internal Error", 'color: #FF0000');
 			break;
 		default:
-			weather_icon.setAttribute("src", "../files/themes/default/icons/weather/" + data.daily[0].weather[0].icon + ".svg")
+			
 			weather_temperature.textContent = (data.daily[0].temp.max).toFixed(1).replace('.0', '') + "°"
 			weather_wind.innerHTML = (data.daily[0].wind_speed).toFixed(1).replace('.0', '') + "<span>km/h</span>"
 			weather_humidity.innerHTML = (data.daily[0].humidity).toFixed(1).replace('.0', '') + "<span>%</span>"
 			weather_precipitation.innerHTML = (data.daily[0].pop).toFixed(1).replace('.0', '') + "<span>%</span>"
+			
+			temp = today.getHours();
+
+			if (temp >= 21 || temp <= 5) {
+				temp2 = data.daily[0].weather[0].icon.substring(0, data.daily[0].weather[0].icon.length - 1);
+				weather_icon.setAttribute("src", "../files/themes/default/icons/weather/" + temp2 + "n.svg")
+				weather.classList.toggle("night")
+			} else if (temp >= 6 || temp < 21) {
+				weather_icon.setAttribute("src", "../files/themes/default/icons/weather/" + data.daily[0].weather[0].icon + ".svg")
+				weather.classList.toggle("day")
+			}
+			
+			weatherChart(data)
 			break;
 	}
 }
+
+// Start ChartJS
+
+function weatherChart(data) {
+	var chartgen = null;
+	var tempgen = [];
+	var max = 0;
+	var min = 0;
+	
+	temp = document.getElementById("weather-units").getAttribute("value")
+		
+	if (temp == "celsius") {
+		min = -30;
+		max = 60;
+		chartgen = [-30,-20,-10,0,10,20,30,40,50,60]
+	} else if (temp == "fahrenheit") {
+		min = -20;
+		max = 160;
+		chartgen = [-20,0,20,40,60,80,100,120,140,160]
+	} else {
+		min = -30;
+		max = 60;
+		chartgen = [-30,-20,-10,0,10,20,30,40,50,60]
+	}
+	
+	for (let i = 0; i < data.daily.length; i++) {
+		tempgen.push((data.daily[i].temp.max).toFixed(1))
+	}			
+	
+	new Chart(weather_graph, { type: "line", data: { labels: day_names, datasets: [{ data: tempgen, borderColor: "rgba(255,255,255,1)", backgroundColor: "transparent" }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { tooltip: { enabled: false } }, legend: {display: false}, scales: { xAxes: [{ display: false, scaleLabel: { display: false }, }], yAxes: [{ display: false, ticks: { min: min, max: max } }], }, elements: { point:{ radius: 0 } } } });
+}
+
+function timelineChart() {
+	
+}	
 
 // Change Weather Fetch
 function weatherChange() {
@@ -303,7 +361,88 @@ function loadPageContent(page) {
 	}, 1000);
 }
 
+// Open Page Popup
+function openPagePopup(page) {
+	temp = document.querySelector(".page-each[value='" + page + "'] .overlay")
+	temp.classList.toggle("active")
+}
+
+// Close Page Popup
+function closePagePopup(page) {
+	temp = document.querySelector(".page-each[value='" + page + "'] .overlay")
+	temp.classList.toggle("active")
+}
+
 // New Note
 function newNote() {
-	
+	/*
+	var query = `
+		{
+			"title": "` + title + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/note/", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		if (!response.ok) {
+			popupMessage(2, "Note Error")
+		}
+		return response.json()
+	}).then(data => {
+		popupMessage(0, "Note Created")
+	})
+	*/
+}
+
+// New Note
+function updateNote() {
+	var query = `
+		{
+			"title": "` + title + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/note/", {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		if (!response.ok) {
+			popupMessage(2, "Note Error")
+		}
+		return response.json()
+	}).then(data => {
+		popupMessage(0, "Note Created")
+	})	
+}
+
+// New Note
+function deleteNote() {
+	var query = `
+		{
+			"title": "` + title + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/note/", {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		if (!response.ok) {
+			popupMessage(2, "Note Error")
+		}
+		return response.json()
+	}).then(data => {
+		popupMessage(0, "Note Created")
+	})	
 }

@@ -1,0 +1,36 @@
+.graph {
+	position: absolute;
+	bottom: 50px;
+	right: 0;
+	border-radius: 14px;
+}
+
+.graph-each {
+	height: 200px;
+	width: 400px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.graph-each > p {
+	text-align: right;
+	color: var(--white-1);
+}
+
+.graph-each > canvas {
+	height: 100% !important;
+	width: 100% !important;
+	-webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, transparent 100%);
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: left top, left bottom;
+}
+
+.graph-each.active {
+	visibility: visible;
+	opacity: 1;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+

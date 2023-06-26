@@ -31,6 +31,10 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 	<%- 
 	include(`../files/themes/${theme_name}/components/weather.ejs`, {theme_name: theme_name})
 	%>
+	
+	<%- 
+	include(`../files/themes/${theme_name}/components/graph.ejs`, {theme_name: theme_name})
+	%>
 
 </div>
 
@@ -45,7 +49,7 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 		include(`../files/themes/${theme_name}/pages/notes.ejs`, {theme_name: theme_name})
 		%>
 	</div>
-	<div class="page-notes page-each" value="tasks" id="page-tasks">
+	<div class="page-tasks page-each" value="tasks" id="page-tasks">
 		<%- 
 		include(`../files/themes/${theme_name}/pages/tasks.ejs`, {theme_name: theme_name})
 		%>

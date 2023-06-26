@@ -3,12 +3,15 @@
 		<h1>Notes</h1>
 		<div>
 			<%- 
-			include(`../components/button.ejs`, { context: "New", className: "button button-1", action: "newNote()" } ) 
+			include(`../components/button.ejs`, { context: "New", className: "button button-1", action: "newNote(); openPagePopup('notes')" } ) 
+			-%>
+			<%- 
+			include(`../components/selection.ejs`, { list: ["All", "vent"], className: "selection selection-1 note-filter", name: "note-active" } ) 
 			-%>
 		</div>
 	</div>
 	<div class="content">
-		<div class="note-each" id="note-vent-1" style="background-color: #FEC870;">
+		<div class="note-each" creationDate="25/06/2023" category="vent" id="note-vent-1" style="background-color: #FEC870;">
 			<p class="title">Title</p>
 			<p class="date">May 21, 2022</p>
 		</div>
@@ -44,5 +47,11 @@
 			<p class="title">Title</p>
 			<p class="date">May 21, 2022</p>
 		</div>
-	</div>	
+	</div>
 </div>
+<div class="overlay">
+	<div class="content">
+		<p class="title">Create Note</p>
+	</div>
+	<div onclick="closePagePopup('notes')" class="background">&nbsp;</div>
+</div>	
