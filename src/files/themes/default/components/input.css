@@ -26,7 +26,6 @@
 	-webkit-transition: all 0.25s ease;
 }
 
-
 .input > .isEmpty + label{
     top: 0px;
     background-color: var(--white-1);

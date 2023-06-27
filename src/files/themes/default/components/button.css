@@ -49,6 +49,21 @@
 	background-color: var(--blue-2);
 }
 
+.button-2 {
+	color: var(--white-1);	
+	background-color: #db2727;
+}
+
+.button-2:hover {
+	color: var(--white-1);	
+	background-color: #9E2222;
+}
+
+.button-2:active {
+	color: var(--white-1);	
+	background-color: #db2727;
+}
+
 .button-next:hover > img,
 .button-next:hover > svg {
 	transform: translateX(10px);

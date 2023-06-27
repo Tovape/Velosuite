@@ -1,6 +1,8 @@
 /* Global Variables */
 var temp = null;
 var temp2 = null;
+var inputs = null;
+var theme_selected = null;
 
 /* Page Navigation */
 var page_each = null;
@@ -32,8 +34,10 @@ var weather_precipitation = null;
 var weather_graph = null;
 
 /* Notes */
+var notes_deposit = null
 var notes_each = null;
 var notes_filter = null
+var notes_delay;
 
 /* Settings */
 var settings_nav = null;
@@ -42,8 +46,7 @@ var settings_page_last = null;
 var settings_page_active = "home";
 
 document.addEventListener("DOMContentLoaded", function(event) {
-	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
-	notes_each = document.querySelectorAll(".page-notes .note-each")
+	notes_deposit = document.getElementById("notes-deposit")
 	settings_nav = document.querySelectorAll(".page-settings .page-nav > p")
 	settings_page_each = document.querySelectorAll(".page-settings .page-content-each")
 	page_each = document.querySelectorAll(".page-each")
@@ -58,7 +61,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	weather_humidity = document.getElementById("weather-humidity");
 	weather_precipitation = document.getElementById("weather-precipitation");
 	weather_graph = document.getElementById("weather-graph");
+	inputs = document.querySelectorAll(".input > input")
+	theme_selected = document.getElementById("theme-selected").getAttribute("value");
 	
+	// Input Listener
+	for (let i = 0; i < inputs.length; i++) {
+		inputs[i].addEventListener('focus', function () {
+			this.classList.add('isEmpty');
+		});
+
+		inputs[i].addEventListener('blur', function () {
+			if (!this.value) {
+				this.classList.remove('isEmpty');
+			}
+		});
+	}
+
 	// Time Clock Init
 	getTime()
 	setInterval(getTime, 59000);
@@ -123,22 +141,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				
 				temp = settings_nav[i].getAttribute("pos")
 				document.querySelector(".page-settings .page-nav").style.setProperty("--top", (parseInt(temp) * (56)) + "px")
-			}
-		});
-	}
-	
-	// Notes Filter
-	for(let i = 0; i < notes_filter.length; i++) {
-		notes_filter[i].addEventListener("click", function() {
-			temp = notes_filter[i].getAttribute("value")
-			for (let j = 0; j < notes_each.length; j++) {
-				if (temp == "All") {
-					notes_each[j].classList.remove("hide")
-				} else if (temp == notes_each[j].getAttribute("category")) {
-					notes_each[j].classList.remove("hide")
-				} else {
-					notes_each[j].classList.add("hide")
-				}
 			}
 		});
 	}
@@ -270,7 +272,6 @@ function parseWeather(data) {
 }
 
 // Start ChartJS
-
 function weatherChart(data) {
 	var chartgen = null;
 	var tempgen = [];
@@ -353,14 +354,6 @@ function getTime(){
 	clock_time.textContent = hr + ":" + min;
 }
 
-// Load Page Content
-function loadPageContent(page) {
-	
-	setTimeout(function(){
-		console.log("SQU STOP")
-	}, 1000);
-}
-
 // Open Page Popup
 function openPagePopup(page) {
 	temp = document.querySelector(".page-each[value='" + page + "'] .overlay")
@@ -373,12 +366,93 @@ function closePagePopup(page) {
 	temp.classList.toggle("active")
 }
 
+// Event Listeners
+function createNoteEvents() {
+	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
+	notes_each = document.querySelectorAll(".page-notes .note-each")
+	
+	// Notes Filter
+	for(let i = 0; i < notes_filter.length; i++) {
+		notes_filter[i].addEventListener("click", function() {
+			temp = notes_filter[i].getAttribute("value")
+			for (let j = 0; j < notes_each.length; j++) {
+				if (temp == "All") {
+					notes_each[j].classList.remove("hide")
+				} else if (temp == notes_each[j].getAttribute("category")) {
+					notes_each[j].classList.remove("hide")
+				} else {
+					notes_each[j].classList.add("hide")
+				}
+			}
+		});
+	}
+	
+	// Note Hold
+	for (var i = 0, j = notes_each.length; i < j; i++) {
+		notes_each[i].addEventListener('mousedown', function (e) {
+			if (this.classList.contains("active")) {
+				this.classList.toggle('active');
+			} else {
+				notes_delay = setTimeout(check, 700);
+				_this = this;
+				function check() {
+					_this.classList.toggle('active');
+				}
+			}
+		}, true);
+
+		notes_each[i].addEventListener('mouseup', function (e) {
+			clearTimeout(notes_delay);
+		});
+
+		notes_each[i].addEventListener('mouseout', function (e) {
+			clearTimeout(notes_delay);
+		});
+	}
+}
+
+
+
+// Get Notes
+function getNotes() {
+	fetch("http://localhost:3000/api/note/", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		}
+	}).then(response => {
+		return response.json()
+	}).then(data => {
+		if (data.status == 0) {
+			for (let i = 0; i < data.notes.length; i++) {
+				temp = JSON.parse(data.notes[i][1])
+				notes_deposit.insertAdjacentHTML("beforeend", `
+				<div class="note-each" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" onclick="openNote('` + data.notes[i][0] + `')" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundColor + `;">
+					<p class="title">` + temp.title + `</p>
+					<p class="date">` + temp.modifiedDate + `</p>
+					` + ejs_templates["button"] + `
+				</div>	
+				`)
+			}
+			createNoteEvents()
+		} else {
+			popupMessage(2, data.message)
+		}
+	})
+}
+
+// Open Note
+function openNote() {
+	
+}
+
 // New Note
 function newNote() {
-	/*
+	temp = document.querySelector(".page-notes input[name='note-title']")
 	var query = `
 		{
-			"title": "` + title + `"
+			"title": "` + temp.value + `"
 		}
 	`;
 	fetch("http://localhost:3000/api/note/", {
@@ -389,17 +463,27 @@ function newNote() {
 		},
 		body: query
 	}).then(response => {
-		if (!response.ok) {
-			popupMessage(2, "Note Error")
-		}
 		return response.json()
 	}).then(data => {
-		popupMessage(0, "Note Created")
+		if (data.status == 0) {
+			popupMessage(0, data.message)
+			notes_deposit.insertAdjacentHTML("beforeend", `
+			<div class="note-each" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" onclick="openNote('` + data.note.filename + `')" category="` + data.note.category + `" id="` + data.note.filename + `" style="background-color: ` + data.note.backgroundColor + `;">
+				<p class="title">` + data.note.title + `</p>
+				<p class="date">` + data.note.modifiedDate + `</p>
+				` + ejs_templates["button"] + `
+			</div>	
+			`)
+			setTimeout(function(){
+				closePagePopup('notes')
+			}, 2000);
+		} else {
+			popupMessage(2, data.message)
+		}
 	})
-	*/
 }
 
-// New Note
+// Update Note
 function updateNote() {
 	var query = `
 		{
@@ -423,7 +507,7 @@ function updateNote() {
 	})	
 }
 
-// New Note
+// Delete Note
 function deleteNote() {
 	var query = `
 		{
@@ -445,4 +529,11 @@ function deleteNote() {
 	}).then(data => {
 		popupMessage(0, "Note Created")
 	})	
+}
+
+// Load Page Content
+function loadPageContent(page) {
+	if (page == "notes") {
+		getNotes()
+	}
 }
