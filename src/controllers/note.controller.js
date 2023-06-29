@@ -61,5 +61,13 @@ export const updateNote = async (req, res) => {
 /* DELETE - Delete Note */
 
 export const deleteNote = async (req, res) => {
+	if (!req.body.filename) {
+		return res.status(403).json({message: "No filename provided", status: 1})
+	}
+	
+	fs.unlink('./content/notes/' + req.body.filename, (err) => {
+		if (err) {}
+	}); 
 
+	return res.status(200).json({message: "Note deleted", status: 0})
 }

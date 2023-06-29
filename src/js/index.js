@@ -38,6 +38,7 @@ var notes_deposit = null
 var notes_each = null;
 var notes_filter = null
 var notes_delay;
+var notes_filter_array = [];
 
 /* Settings */
 var settings_nav = null;
@@ -354,22 +355,27 @@ function getTime(){
 	clock_time.textContent = hr + ":" + min;
 }
 
-// Open Page Popup
-function openPagePopup(page) {
-	temp = document.querySelector(".page-each[value='" + page + "'] .overlay")
+// Toggle Page Popup
+function togglePagePopup(page) {
+	temp = document.querySelector(".page-each.active .overlay."+page)
 	temp.classList.toggle("active")
 }
 
-// Close Page Popup
-function closePagePopup(page) {
-	temp = document.querySelector(".page-each[value='" + page + "'] .overlay")
-	temp.classList.toggle("active")
-}
-
-// Event Listeners
+// Note Event Listeners
 function createNoteEvents() {
 	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
 	notes_each = document.querySelectorAll(".page-notes .note-each")
+	
+	// Note Click
+	for (var i = 0, j = notes_each.length; i < j; i++) {
+		notes_each[i].addEventListener('click', function (e) {
+			if (this.classList.contains("lag")) {
+				openNote(this.getAttribute("id"))
+				console.log(this)
+				console.log(2)
+			}
+		});
+	}
 	
 	// Notes Filter
 	for(let i = 0; i < notes_filter.length; i++) {
@@ -386,17 +392,30 @@ function createNoteEvents() {
 			}
 		});
 	}
+	document.querySelector(".page-notes .header-filters .note-filter .selection-each input[value='All']").click()
 	
 	// Note Hold
 	for (var i = 0, j = notes_each.length; i < j; i++) {
 		notes_each[i].addEventListener('mousedown', function (e) {
-			if (this.classList.contains("active")) {
-				this.classList.toggle('active');
-			} else {
-				notes_delay = setTimeout(check, 700);
-				_this = this;
-				function check() {
-					_this.classList.toggle('active');
+			if (e.target.nodeName != "BUTTON") {
+				if (this.classList.contains("active")) {
+					this.classList.toggle('active');
+					_this = this
+					console.log(1)
+					setTimeout(function(){
+						_this.classList.add('lag');
+					}, 300);
+					console.log(3)
+				} else {
+					notes_delay = setTimeout(check, 700);
+					_this = this;
+					function check() {
+						if (!_this.classList.contains("active")) {
+							_this.classList.add('active');
+							_this.classList.remove('lag');
+							console.log(_this)
+						}
+					}
 				}
 			}
 		}, true);
@@ -411,7 +430,17 @@ function createNoteEvents() {
 	}
 }
 
-
+// Note Filters Listeners
+function createNoteFilters() {
+	temp = [...new Set(notes_filter_array)];
+	for (let i = 0; i < temp.length; i++) {
+		temp2 = document.querySelector(".page-notes .header-filters .note-filter .selection-each").cloneNode(true);
+		temp2.querySelector("input").setAttribute("value", temp[i])
+		temp2.querySelector("input").setAttribute("id", temp[i])
+		temp2.querySelector("label").textContent = temp[i]
+		document.querySelector(".page-notes .header-filters .note-filter").insertAdjacentHTML("beforeend", temp2.outerHTML);
+	}
+}
 
 // Get Notes
 function getNotes() {
@@ -427,14 +456,20 @@ function getNotes() {
 		if (data.status == 0) {
 			for (let i = 0; i < data.notes.length; i++) {
 				temp = JSON.parse(data.notes[i][1])
+				temp2 = ejs_templates["deleteNote"]
+				temp2 = temp2.replace("replace_filename", data.notes[i][0])
+				if (temp.category != null) {
+					notes_filter_array.push(temp.category)
+				}
 				notes_deposit.insertAdjacentHTML("beforeend", `
-				<div class="note-each" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" onclick="openNote('` + data.notes[i][0] + `')" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundColor + `;">
+				<div class="note-each" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundColor + `;">
 					<p class="title">` + temp.title + `</p>
 					<p class="date">` + temp.modifiedDate + `</p>
-					` + ejs_templates["button"] + `
+					` + temp2 + `
 				</div>	
 				`)
 			}
+			createNoteFilters()
 			createNoteEvents()
 		} else {
 			popupMessage(2, data.message)
@@ -443,8 +478,14 @@ function getNotes() {
 }
 
 // Open Note
-function openNote() {
-	
+function openNote(id) {
+	togglePagePopup("read")
+	tinymce.init({
+		selector: document.getElementById("hola"),
+		plugins: 'a_tinymce_plugin',
+		a_plugin_option: true,
+		a_configuration_option: 400
+	});
 }
 
 // New Note
@@ -467,15 +508,18 @@ function newNote() {
 	}).then(data => {
 		if (data.status == 0) {
 			popupMessage(0, data.message)
+			temp2 = ejs_templates["deleteNote"]
+			temp2 = temp2.replace("replace_filename", data.note.filename + ".json")
 			notes_deposit.insertAdjacentHTML("beforeend", `
-			<div class="note-each" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" onclick="openNote('` + data.note.filename + `')" category="` + data.note.category + `" id="` + data.note.filename + `" style="background-color: ` + data.note.backgroundColor + `;">
+			<div class="note-each" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundColor + `;">
 				<p class="title">` + data.note.title + `</p>
 				<p class="date">` + data.note.modifiedDate + `</p>
-				` + ejs_templates["button"] + `
+				` + temp2 + `
 			</div>	
 			`)
+			createNoteEvents()
 			setTimeout(function(){
-				closePagePopup('notes')
+				togglePagePopup('create')
 			}, 2000);
 		} else {
 			popupMessage(2, data.message)
@@ -503,15 +547,17 @@ function updateNote() {
 		}
 		return response.json()
 	}).then(data => {
-		popupMessage(0, "Note Created")
+		if (data.status == 0) {
+			popupMessage(0, data.message)
+		}
 	})	
 }
 
 // Delete Note
-function deleteNote() {
+function deleteNote(filename) {
 	var query = `
 		{
-			"title": "` + title + `"
+			"filename": "` + filename + `"
 		}
 	`;
 	fetch("http://localhost:3000/api/note/", {
@@ -527,7 +573,10 @@ function deleteNote() {
 		}
 		return response.json()
 	}).then(data => {
-		popupMessage(0, "Note Created")
+		if (data.status == 0) {
+			popupMessage(0, data.message)
+			document.getElementById(filename).remove()
+		}
 	})	
 }
 

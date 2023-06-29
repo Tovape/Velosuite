@@ -84,11 +84,11 @@ var ejs_templates = {};
 
 temp3 = ejs.render(`
 <%-
-include('../files/themes/default/components/button.ejs', { context: "Delete", className: "button button-2", action: "deleteNote('filename')" } ) 
+include('../files/themes/default/components/button.ejs', { context: "Delete", className: "button button-2", action: "deleteNote('replace_filename')" } ) 
 -%>
 `);
 
-ejs_templates = { ...ejs_templates, ...{"button": temp3} };
+ejs_templates = { ...ejs_templates, ...{"deleteNote": temp3} };
 
 </script>
 

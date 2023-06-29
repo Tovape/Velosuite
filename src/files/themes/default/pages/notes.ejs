@@ -1,23 +1,23 @@
 <div class="page-container container">
 	<div class="header">
 		<h1>Notes</h1>
-		<div>
+		<div class="header-filters">
 			<%- 
-			include(`../components/button.ejs`, { context: "New", className: "button button-1", action: "openPagePopup('notes')" } ) 
+			include(`../components/button.ejs`, { context: "New", className: "button button-1", action: "togglePagePopup('create')" } ) 
 			-%>
 			<%- 
-			include(`../components/selection.ejs`, { list: ["All", "vent"], className: "selection selection-1 note-filter", name: "note-active" } ) 
+			include(`../components/selection.ejs`, { list: ["All"], className: "selection selection-1 note-filter", name: "note-active" } ) 
 			-%>
 		</div>
 	</div>
 	<div class="content" id="notes-deposit">
 	</div>
 </div>
-<div class="overlay">
+<div class="overlay create">
 	<div class="content">
 		<div class="content-header">
 			<p class="title">Create Note</p>
-			<img onclick="closePagePopup('notes')" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
+			<img onclick="togglePagePopup('create')" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
 		</div>
 		<div class="content-main">
 			<%- 
@@ -28,5 +28,18 @@
 			-%>
 		</div>
 	</div>
-	<div onclick="closePagePopup('notes')" class="background">&nbsp;</div>
+	<div onclick="togglePagePopup('create')" class="background">&nbsp;</div>
+</div>	
+
+<div class="overlay read">
+	<div class="content">
+		<div class="content-header">
+			<p class="title">Note Title</p>
+			<img onclick="togglePagePopup('read')" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
+		</div>
+		<div class="content-main">
+			<p id="hola"></p>
+		</div>
+	</div>
+	<div onclick="togglePagePopup('read')" class="background">&nbsp;</div>
 </div>	

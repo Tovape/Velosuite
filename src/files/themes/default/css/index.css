@@ -119,6 +119,10 @@ body {
 	z-index: 2;
 }
 
+.page-each .overlay.read {
+	
+}
+
 .container.home {
 	position:absolute;
 	height: calc(100% - 48px);
@@ -149,7 +153,7 @@ body {
     justify-content: space-between;
 }
 
-.page-container > div.header > div {
+.page-container > div.header > div.header-filters {
     display: flex;
     align-items: center;
     flex-direction: row;
