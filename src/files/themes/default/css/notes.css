@@ -1,0 +1,45 @@
+/* Notes */
+
+.page-notes .page-container .content {
+	display: grid;
+    grid-auto-rows: 230px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.page-notes .page-container .content .note-each {
+	border-radius: 14px;
+	cursor: pointer;
+	padding: 18px;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+	position: relative;
+	overflow: hidden;
+}
+
+.page-notes .page-container .content .note-each.hide {
+	display: none;
+}
+
+.page-notes .page-container .content .note-each .title,
+.page-notes .page-container .content .note-each .date {
+	font-family: var(--poppins);
+}
+
+.page-notes .page-container .content .note-each.active button {
+	bottom: 10px;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.page-notes .page-container .content .note-each button {
+	position: absolute;
+	justify-content: center;
+    width: calc(100% - 100px);
+	bottom: -100%;
+	left: 10px;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}

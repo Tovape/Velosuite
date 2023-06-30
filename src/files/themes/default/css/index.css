@@ -1,3 +1,5 @@
+/* Index */
+
 html, body {
 	height: 100%;
 }
@@ -9,6 +11,16 @@ body {
 	display: flex;
     justify-content: center;
 }
+
+@media (max-width: 768px) {
+
+body {
+    background-position: left center;
+}
+
+}
+
+/* Page */
 
 .pages {
 	display: flex;
@@ -46,6 +58,49 @@ body {
 .page-each.index {
 	z-index:2;
 }
+
+.page-container {
+	display: flex;
+    flex-direction: column;
+	gap: 60px;
+	margin: 60px auto 0 auto;
+	height: calc(100% - 60px);
+	overflow: hidden;
+	position: relative;
+}
+
+.page-container h1 {
+	line-height: 1;
+	font-size:60px;
+	font-weight: 600;
+	font-family: var(--poppins);
+}
+
+.page-container > div.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-container > div.header > div.header-filters {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.page-container > div.content {
+	height: 100%;
+    overflow: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.page-container > div.content::-webkit-scrollbar {
+	display: none;
+}
+
+/* Overlay */
 
 .page-each .overlay {
 	height: 100%;
@@ -96,6 +151,13 @@ body {
     justify-content: space-between;
 }
 
+.page-each .overlay .content-header > div {
+	display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
 .page-each .overlay .content-header > img {
 	width: 30px;
 	cursor:pointer;
@@ -119,222 +181,42 @@ body {
 	z-index: 2;
 }
 
-.page-each .overlay.read {
-	
+.page-each .overlay.full .content {
+	width: 100%;
+    height: 100%;
 }
 
-.container.home {
-	position:absolute;
-	height: calc(100% - 48px);
-}
-
-.container.home .graph {display: none;}
-
-.page-container {
-	display: flex;
-    flex-direction: column;
-	gap: 60px;
-	margin: 60px auto 0 auto;
-	height: calc(100% - 60px);
-	overflow: hidden;
-	position: relative;
-}
-
-.page-container h1 {
-	line-height: 1;
-	font-size:60px;
-	font-weight: 600;
-	font-family: var(--poppins);
-}
-
-.page-container > div.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.page-container > div.header > div.header-filters {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.page-container > div.content {
+.page-each .overlay.full .content-main {
 	height: 100%;
-    overflow: scroll;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-.page-container > div.content::-webkit-scrollbar {
-	display: none;
-}
-
-/* Notes Page */
-
-.page-notes .page-container .content {
-	display: grid;
-    grid-auto-rows: 230px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.page-notes .page-container .content .note-each {
-	border-radius: 14px;
-	cursor: pointer;
-	padding: 18px;
-	display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-	position: relative;
-	overflow: hidden;
-}
-
-.page-notes .page-container .content .note-each.hide {
-	display: none;
-}
-
-.page-notes .page-container .content .note-each .title,
-.page-notes .page-container .content .note-each .date {
-	font-family: var(--poppins);
-}
-
-.page-notes .page-container .content .note-each.active button {
-	bottom: 10px;
-	transition: all 0.25s ease-in-out;
-	-webkit-transition: all 0.25s ease-in-out;
-}
-
-.page-notes .page-container .content .note-each button {
-	position: absolute;
-	justify-content: center;
-    width: calc(100% - 100px);
-	bottom: -100%;
-	left: 10px;
-	transition: all 0.25s ease-in-out;
-	-webkit-transition: all 0.25s ease-in-out;
-}
-
-/* Settings Page */
-
-.page-settings .content {
-	display: flex;
-    flex-direction: row;
-    gap: 60px;
-}
-
-.page-settings .page-container .page-nav {
-	--top: 0px;
-	display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-	position: relative;
-}
-
-.page-settings .page-container .page-nav::before {
-	content:"";
-	border-radius: 6px;
-	left: 0;
-	top: calc(var(--top) + 10px);
-	height: 36px;
-	width: 3px;
-	position: absolute;
-	background-color: var(--blue-1);
-	transition: all 0.25s ease-in-out;
-	-webkit-transition: all 0.25s ease-in-out;
-}
-
-.page-settings .page-container .page-nav > p {
-    padding: 10px 30px;
-	font-family: var(--poppins);
-	font-size:var(--undfont);
-	background-color: transparent;
-	display: flex;
-    align-items: center;
-	cursor:pointer;
-	width: 100%;
-	height: 56px;
-	transition: all 0.25s ease-in-out;
-	-webkit-transition: all 0.25s ease-in-out;
-}
-
-.page-settings .page-container .page-nav > p.active {
-	color: var(--blue-2);
-	transition: all 0.25s ease-in-out;
-	-webkit-transition: all 0.25s ease-in-out;
-}
-
-.page-settings .page-container .page-content {
-	background-color: var(--white-1);
-	border-radius: 14px;
-	width: 100%;
-	height: 100%;
-	padding: 30px;
-}
-
-.page-settings .page-container .page-content-each {
-	display: none;
-	flex-direction: column;
-	gap: 30px;
-}
-
-.page-settings .page-container .page-content-each > div {
-	display: flex;
-	flex-direction: column;
-}
-
-.page-settings .page-container .page-content-each > div > h2 {
-	font-family: var(--poppins);
-	font-size:var(--bigfont);	
-}
-
-.page-settings .page-container .page-content-each > div > p {
-	font-family: var(--poppins);
-	font-size:var(--norfont);	
-	color: var(--gray-1);
-}
-
-.page-settings .page-container .page-content-each > div > p > a {
-	color: var(--blue-2);
-	display: inline-block;
-}
-
-.page-settings .page-container .page-content-each > div > div {
-	background-color: var(--white-2);
-	border-radius: 14px;
-	width: 100%;
-	padding: 30px;
-	margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.page-settings .page-container .page-content-each.active {
-	display: flex;
 }
 
 @media (max-width: 768px) {
 
-body {
-    background-position: left center;
+.page-each .overlay .content {
+	width: calc(100% - 20px);
+    height: calc(100% - 20px);
+	padding: 20px;
 }
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
 
 .page-container h1 {
     font-size: var(--bigfont);
-}
-
-.container.home {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-	justify-content: flex-start;
-    gap: 30px;
-	height: calc(100% - 110px);
-    margin-top: 20px;
-    margin-bottom: 90px;
 }
 
 .pages {
@@ -350,12 +232,6 @@ body {
 }
 
 .page-notes .page-container .note-filter {display: none;}
-
-.page-each .overlay .content {
-	width: calc(100% - 20px);
-    height: calc(100% - 20px);
-	padding: 20px;
-}
 
 }
 

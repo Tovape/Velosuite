@@ -55,7 +55,13 @@ export const createNote = async (req, res) => {
 /* POST - Update Note */
 
 export const updateNote = async (req, res) => {
-
+	if (!req.body.filename) {
+		return res.status(403).json({message: "No filename provided", status: 1})
+	}
+	
+	
+	
+	return res.status(200).json({message: "Note updated", status: 0})
 }
 
 /* DELETE - Delete Note */

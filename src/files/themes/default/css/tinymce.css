@@ -1,0 +1,6 @@
+/* TinyMCE */
+
+.tox-promotion,
+.tox-statusbar__text-container {display: none !important;}
+.tox.tox-tinymce {height: 100% !important;}
+.tox.tox-silver-sink.tox-tinymce-aux {position: absolute !important;}

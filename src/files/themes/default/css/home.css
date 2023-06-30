@@ -1,0 +1,23 @@
+/* Home */
+
+.container.home {
+	position:absolute;
+	height: calc(100% - 48px);
+}
+
+.container.home .graph {display: none;}
+
+@media (max-width: 768px) {
+
+.container.home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	justify-content: flex-start;
+    gap: 30px;
+	height: calc(100% - 110px);
+    margin-top: 20px;
+    margin-bottom: 90px;
+}
+
+}

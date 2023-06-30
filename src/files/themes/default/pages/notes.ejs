@@ -31,15 +31,22 @@
 	<div onclick="togglePagePopup('create')" class="background">&nbsp;</div>
 </div>	
 
-<div class="overlay read">
+<div class="overlay full read">
 	<div class="content">
 		<div class="content-header">
-			<p class="title">Note Title</p>
-			<img onclick="togglePagePopup('read')" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
+			<div>
+			<%- 
+			include(`../components/input.ejs`, { placeholder: "	", className: "input input-2 title", name: "note-current-title" } ) 
+			-%>
+			<%- 
+			include(`../components/input.ejs`, { placeholder: "Category", className: "input input-1", name: "note-category" } ) 
+			-%>
+			</div>
+			<img onclick="togglePagePopup('read'); noteEndInterval()" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
 		</div>
 		<div class="content-main">
-			<p id="hola"></p>
+			<textarea id="tinymce-og"></textarea>
 		</div>
 	</div>
-	<div onclick="togglePagePopup('read')" class="background">&nbsp;</div>
+	<div onclick="togglePagePopup('read'); noteEndInterval()" class="background">&nbsp;</div>
 </div>	
