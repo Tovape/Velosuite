@@ -14,6 +14,8 @@ import packagejson from '../package.json' assert { type: 'json' };
 const __dirname = path.resolve();
 const app = express();
 const port = 3000;
+
+// Other Variables
 var lock_setup = false;
 var theme_selected = 0;
 var theme_list = [];
@@ -23,7 +25,6 @@ var weather_units = ["celsius", "fahrenheit"]
 var general = null;
 
 // Firewall
-
 app.all(['/server.js', '/database.js', '/controllers/*', '/middleware/*', '/models/*', '/routes/*'], function (req,res, next) {
    res.status(403).send({ message: 'Access Forbidden' });
 });

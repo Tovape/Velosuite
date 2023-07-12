@@ -1,0 +1,3 @@
+Category input in notes not getting correct value
+
+Probably best if we drag js files to ouside the theme? the theme should be for colors, fonts, sizes, images, components etc	

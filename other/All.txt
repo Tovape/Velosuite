@@ -7,9 +7,10 @@ This app is for discipline and organizing life, for a more productive oriented a
 Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | NodeJS | PWA | Tiny Markdown
+HTML | CSS | JS | NodeJS | PWA | TinyMCE | FS | JWT
 
 Desirable Environment:
+Self Hosting
 Raspberry Pi 3/Linux/Windows
 
 Removed MongoDB, I'll use JSONs as the database, this way it requires way less preparation for setting up this thing
@@ -181,10 +182,10 @@ this app will need a dev section with some button to empty cache
 Todo:
 	Code:
 	Add background image load in the background and at next page reload take that image instead of the min compressed one, like a global cache function, check if there is size enough to store stuff like fonts (max priority), images etc
-	Draggable windows
+	Draggable windows (Won't do it probably)
 	
 	Design:
 	Add showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
 
 Notes:
-	MongoDB creates the table and the database if they dont exist
+	MongoDB creates the table and the database if they dont exist (Removed)

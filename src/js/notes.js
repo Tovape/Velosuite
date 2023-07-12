@@ -5,10 +5,20 @@ var notes_filter = null
 var notes_delay;
 var notes_filter_array = [];
 var notes_interval = null;
-var notes_content = [];
+var notes_opened = null;
+var notes_content = [{
+	"filename": null,
+	"title": null,
+	"category": null,
+	"content": null
+}];
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	notes_deposit = document.getElementById("notes-deposit")
+		
+	tinymce.init({
+		selector: "#tinymce-note"
+	});
 });
 
 // Note Event Listeners
@@ -17,7 +27,7 @@ function createNoteEvents() {
 	notes_each = document.querySelectorAll(".page-notes .note-each")
 	
 	// Note Click
-	for (var i = 0, j = notes_each.length; i < j; i++) {
+	for (var i = 0; i < notes_each.length; i++) {
 		notes_each[i].addEventListener('click', function (e) {
 			if (this.classList.contains("lag")) {
 				openNote(this.getAttribute("id"))
@@ -79,11 +89,13 @@ function createNoteEvents() {
 function createNoteFilters() {
 	temp = [...new Set(notes_filter_array)];
 	for (let i = 0; i < temp.length; i++) {
-		temp2 = document.querySelector(".page-notes .header-filters .note-filter .selection-each").cloneNode(true);
-		temp2.querySelector("input").setAttribute("value", temp[i])
-		temp2.querySelector("input").setAttribute("id", temp[i])
-		temp2.querySelector("label").textContent = temp[i]
-		document.querySelector(".page-notes .header-filters .note-filter").insertAdjacentHTML("beforeend", temp2.outerHTML);
+		if (temp[i] != "" && temp[i] != undefined && temp[i] != null) {
+			temp2 = document.querySelector(".page-notes .header-filters .note-filter .selection-each").cloneNode(true);
+			temp2.querySelector("input").setAttribute("value", temp[i])
+			temp2.querySelector("input").setAttribute("id", temp[i])
+			temp2.querySelector("label").textContent = temp[i]
+			document.querySelector(".page-notes .header-filters .note-filter").insertAdjacentHTML("beforeend", temp2.outerHTML);
+		}
 	}
 }
 
@@ -107,20 +119,19 @@ function getNotes() {
 					notes_filter_array.push(temp.category)
 				}
 				notes_deposit.insertAdjacentHTML("beforeend", `
-				<div class="note-each lag" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundColor + `;">
+				<div class="note-each lag" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundImage + `;">
 					<p class="title">` + temp.title + `</p>
 					<p class="date">` + temp.modifiedDate + `</p>
 					` + temp2 + `
 				</div>	
 				`)
 				notes_content.push({
-					"id": data.notes[i][0],
+					"filename": data.notes[i][0],
 					"title": temp.title,
 					"category": temp.category,
 					"content": temp.content
 				})
 			}
-			console.log(notes_content)
 			createNoteFilters()
 			createNoteEvents()
 		} else {
@@ -130,19 +141,22 @@ function getNotes() {
 }
 
 // Open Note
-function openNote(id) {
+function openNote(filename) {
 	togglePagePopup("read")
-	tinymce.init({
-		selector: "#tinymce-og"
-	});
-	noteBeginInterval(id)
-	/*tinyMCE.activeEditor.setContent();*/
+	noteBeginInterval(filename)
 
 	var result = notes_content.filter(obj => {
-		return obj.id === id
+		return obj.filename === filename
 	})
-		
+	
+	tinymce.get("tinymce-note").setContent(result[0].content)
+
+console.log(result[0])
+	notes_opened = result[0].filename
 	document.getElementById('note-current-title').setAttribute("value", result[0].title)
+	document.getElementById("note-category").setAttribute("value", result[0].category)
+	document.getElementById("note-category").classList.add("isEmpty")
+	
 	document.getElementById('note-current-title').addEventListener('input', function() {
 		this.style.width = this.value.length + 'ch'
 	})
@@ -171,17 +185,24 @@ function newNote() {
 			popupMessage(0, data.message)
 			temp2 = ejs_templates["deleteNote"]
 			temp2 = temp2.replace("replace_filename", data.note.filename + ".json")
+			if (temp.category != null) {
+				notes_filter_array.push(temp.category)
+			}
 			notes_deposit.insertAdjacentHTML("beforeend", `
-			<div class="note-each lag" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundColor + `;">
+			<div class="note-each lag" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundImage + `;">
 				<p class="title">` + data.note.title + `</p>
 				<p class="date">` + data.note.modifiedDate + `</p>
 				` + temp2 + `
 			</div>	
 			`)
+			notes_content.push({
+				"filename": data.note.filename + ".json",
+				"title": data.note.title,
+				"category": "",
+				"content": ""
+			})
+			createNoteFilters()
 			createNoteEvents()
-			setTimeout(function(){
-				togglePagePopup('create')
-			}, 2000);
 		} else {
 			popupMessage(2, data.message)
 		}
@@ -190,14 +211,24 @@ function newNote() {
 
 // Update Note
 function updateNote() {
-	/*tinymce.get("mytextarea").getContent()
-	 Here you must get the content from tinymce, the category, name etc and update it in the backend 
-	
+	console.log('%c Updating Notes', 'color: #6D94DB');
 	var query = `
 		{
-			"title": "` + title + `"
+			"filename": "` + notes_opened + `",
+			"title": "` + document.getElementById("note-current-title").value + `",
+			"category": "` + document.getElementById("note-category").value + `",
+			"content": ` + JSON.stringify(tinymce.get("tinymce-note").getContent()) + `
 		}
 	`;
+	
+	var result = notes_content.filter(obj => {
+		return obj.filename === notes_opened
+	})
+	
+	result[0]["title"] = document.getElementById("note-current-title").value
+	result[0]["category"] = document.getElementById("note-category").value
+	result[0]["content"] = tinymce.get("tinymce-note").getContent()
+	
 	fetch("http://localhost:3000/api/note/", {
 		method: "PUT",
 		headers: {
@@ -206,16 +237,12 @@ function updateNote() {
 		},
 		body: query
 	}).then(response => {
-		if (!response.ok) {
-			popupMessage(2, "Note Error")
-		}
 		return response.json()
 	}).then(data => {
-		if (data.status == 0) {
-			popupMessage(0, data.message)
+		if (data.status == 1) {
+			popupMessage(1, data.message)
 		}
 	})	
-	*/
 }
 
 // Delete Note
@@ -251,6 +278,10 @@ function noteBeginInterval(filename) {
 }
 
 function noteEndInterval() {
+	updateNote()
 	clearInterval(notes_interval);
+	notes_opened = null;
 	document.getElementById('note-title').removeEventListener("input", function() {});
+	document.getElementById('note-current-title').removeEventListener("input", function() {});
+	document.getElementById('note-category').removeEventListener("input", function() {});
 }

@@ -31,20 +31,20 @@ export const createNote = async (req, res) => {
 	temp = dd + '/' + mm + '/' + yyyy;
 	
 	var newString = req.body.title.replace(/[^A-Z0-9]/ig, "_");
-	var newData = {
-		"title": req.body.title,
-		"category": null,
-		"creationDate": temp,
-		"modifiedDate": temp,
-		"backgroundImage": null,
-		"backgroundColor": "#FEC870",
-		"filename": newString,
-		"content": ""
-	};
-
+	
 	if (fs.existsSync('./content/notes/' + newString + '.json')) {
 		newString += "-" + randomString(5)
 	}
+	
+	var newData = {
+		"title": req.body.title,
+		"category": "",
+		"creationDate": temp,
+		"modifiedDate": temp,
+		"backgroundImage": "#FEC870",
+		"filename": newString,
+		"content": ""
+	};
 	
 	fs.appendFile('./content/notes/' + newString + '.json', JSON.stringify(newData), function (err) {
 		if (err) throw err;
@@ -59,9 +59,29 @@ export const updateNote = async (req, res) => {
 		return res.status(403).json({message: "No filename provided", status: 1})
 	}
 	
-	
-	
-	return res.status(200).json({message: "Note updated", status: 0})
+	if (fs.existsSync('./content/notes/' + req.body.filename)) {		
+		temp = new Date();
+		const yyyy = temp.getFullYear();
+		const mm = temp.getMonth() + 1;
+		const dd = temp.getDate();
+		temp = dd + '/' + mm + '/' + yyyy;
+			
+		var updateData = {
+			"title": req.body.title,
+			"category": req.body.category,
+			"modifiedDate": temp,
+			"backgroundImage": "#FF0000",
+			"content": req.body.content
+		};
+
+		fs.writeFile('./content/notes/' + req.body.filename, JSON.stringify(updateData), err => {
+			if (err) throw err;
+			return res.status(200).json({message: "Note updated", status: 0})
+		});
+
+	} else {
+		return res.status(403).json({message: "File doesn't exist", status: 1})
+	}
 }
 
 /* DELETE - Delete Note */
