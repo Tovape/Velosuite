@@ -41,6 +41,9 @@
 			<%- 
 			include(`../components/input.ejs`, { placeholder: "Category", className: "input input-1", name: "note-category" } ) 
 			-%>
+			<%- 
+			include(`../components/imagecolor.ejs`, { className: "imagecolor imagecolor-1", name: "note-image" } ) 
+			-%>
 			</div>
 			<img onclick="togglePagePopup('read'); noteEndInterval()" src="../files/themes/<%= theme_name %>/icons/global/close.svg">
 		</div>

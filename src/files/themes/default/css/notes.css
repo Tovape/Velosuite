@@ -26,6 +26,19 @@
 .page-notes .page-container .content .note-each .title,
 .page-notes .page-container .content .note-each .date {
 	font-family: var(--poppins);
+	position: relative;
+    z-index: 1;
+}
+
+.page-notes .page-container .content .note-each .backgroundImage {
+	position: absolute;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    border-radius: 14px;
+    height: calc(100% - 20px);
+    z-index: 0;
+    object-fit: cover;
 }
 
 .page-notes .page-container .content .note-each.active button {
@@ -39,6 +52,7 @@
 	justify-content: center;
     width: calc(100% - 100px);
 	bottom: -100%;
+	z-index: 2;
 	left: 10px;
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;

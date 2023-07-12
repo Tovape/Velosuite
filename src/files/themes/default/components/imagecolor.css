@@ -1,0 +1,140 @@
+.imagecolor-1 {
+	height: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.imagecolor-1 > input {
+	cursor:pointer;
+	border: 2px solid var(--gray-1);
+    outline: none;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    border-radius: 8px;
+    display: block;
+	background-position:center;
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-color:white;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.imagecolor-1 > input:checked {
+	background-color:var(--blue-2);
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.imagecolor-1 > div {
+	display: none;
+	position: absolute;
+	bottom: -240px;
+	left:0;
+	height:220px;
+	width:300px;
+	background-color:white;
+	padding:20px;
+	border-radius: 14px;
+	z-index: 3;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	cursor:pointer;
+}
+
+.imagecolor-1 > div > img.remove,
+.imagecolor-1 > div > img.close {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	border-radius: 90px;
+	padding:4px;
+	background-color:white;
+	width: 20px;
+	height: 20px;
+	z-index: 5;
+}
+
+.imagecolor-1 > div > img.remove {
+	right: 60px;
+	background-color:#ff4343;
+}
+
+.imagecolor-1 > div > input[type="color"] {
+	-webkit-appearance: none;
+	padding: 0;
+	border: none;
+	border-radius: 14px;
+	width: 100%;
+	height: 100%;
+}
+
+.imagecolor-1 > div > input[type="color"]::-webkit-color-swatch {
+	border: none;
+	border-radius: 14px;
+	padding: 0;
+}
+
+.imagecolor-1 > div > input[type="color"]::-webkit-color-swatch-wrapper {
+	border: none;
+	border-radius: 14px;
+	padding: 0;
+}
+
+.imagecolor-1 > div[value="Image"] > div {
+	background-image:url(../icons/global/color.svg);
+	border: 1px dashed var(--gray-1);
+	position: relative;
+	height: 100%;
+	background-position:center;
+	background-repeat: no-repeat;
+	background-size: 30px;
+	border-radius: 14px;
+}
+
+.imagecolor-1 > div[value="Image"] input {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;left:0;
+	opacity:0;
+}
+
+.imagecolor-1 > div[value="Image"] .placeholder {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 14px;
+	opacity:0;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+}
+
+.imagecolor-1 > div[value="Image"] .placeholder.active {
+	opacity:1;
+	display: block !important;
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;	
+}
+
+.imagecolor-1 > input[value="Image"] {
+	background-image:url(../icons/global/color.svg);
+}
+
+.imagecolor-1 > input[value="Color"] {
+	background-image:url(../icons/global/theme.svg);
+}
+
+.imagecolor-1 > input[value="Image"]:checked + div[value="Image"]{
+    display: block;
+}
+
+.imagecolor-1 > input[value="Color"]:checked + div[value="Color"]{
+    display: block;
+}
+

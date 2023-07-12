@@ -41,7 +41,8 @@ export const createNote = async (req, res) => {
 		"category": "",
 		"creationDate": temp,
 		"modifiedDate": temp,
-		"backgroundImage": "#FEC870",
+		"backgroundImage": "",
+		"backgroundColor": "#6D94DB",
 		"filename": newString,
 		"content": ""
 	};
@@ -58,7 +59,7 @@ export const updateNote = async (req, res) => {
 	if (!req.body.filename) {
 		return res.status(403).json({message: "No filename provided", status: 1})
 	}
-	
+
 	if (fs.existsSync('./content/notes/' + req.body.filename)) {		
 		temp = new Date();
 		const yyyy = temp.getFullYear();
@@ -70,7 +71,8 @@ export const updateNote = async (req, res) => {
 			"title": req.body.title,
 			"category": req.body.category,
 			"modifiedDate": temp,
-			"backgroundImage": "#FF0000",
+			"backgroundImage": req.body.backgroundImage,
+			"backgroundColor": req.body.backgroundColor,
 			"content": req.body.content
 		};
 

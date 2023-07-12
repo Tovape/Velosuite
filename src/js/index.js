@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			temp = navigator_each[i].getAttribute("value")
 			if (!(page_active == temp)) {
 				page_active = temp
-				loadPageContent(temp)
 				togglePage(temp)
 			} else {
 				page_active = "home"
@@ -50,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 		});
 	}
+	
+	// Load data
+	getNotes()
 });
 
 // Toggle Page
@@ -108,11 +110,4 @@ function themeChange() {
 function togglePagePopup(page) {
 	temp = document.querySelector(".page-each.active .overlay."+page)
 	temp.classList.toggle("active")
-}
-
-// Load Page Content
-function loadPageContent(page) {
-	if (page == "notes") {
-		getNotes()
-	}
 }

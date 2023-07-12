@@ -1,0 +1,16 @@
+<div class="<%= className %>">
+	<input type="radio" id="<%= name %>-image" name="<%= name %>" value="Image">
+	<div value="Image">
+		<img class="close" onclick="closeColorSelector()" src="../files/themes/default/icons/global/close.svg">
+		<img class="remove" onclick="deleteImageSelector()" src="../files/themes/default/icons/global/delete-white.svg">
+		<img class="placeholder" onerror="this.style.display='none'" id="<%= name %>-image-placeholder" src="">
+		<div>
+			<input type="file" name="<%= name %>-image-value" id="<%= name %>-image-value" />
+		</div>
+	</div>
+	<input type="radio" id="<%= name %>-color" name="<%= name %>" value="Color">
+	<div value="Color">
+		<img class="close" onclick="closeColorSelector()" src="../files/themes/default/icons/global/close.svg">
+		<input type="color" name="<%= name %>-color-value" id="<%= name %>-color-value" value="#6D94DB">
+	</div>
+</div>
