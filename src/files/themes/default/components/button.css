@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: space-between;
 	gap: 30px;
+	text-align: center;
 	overflow: hidden;
 	text-transform: capitalize;
 	border-radius: 14px;
@@ -82,4 +83,12 @@
 .button-back:active > img,
 .button-back:active > svg {
 	transform: translateX(-100px);
+}
+
+@media (max-width: 768px) {
+
+.button {
+	padding: 12px;	
+}
+
 }

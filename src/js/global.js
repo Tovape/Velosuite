@@ -72,3 +72,11 @@ function loadLocalhost(name) {
 		return false;
 	}
 }
+
+// Clone Replace
+function replaceSelf(node) {
+	const clone = node.cloneNode(true);
+	node.replaceWith(clone);
+
+	return clone;
+}

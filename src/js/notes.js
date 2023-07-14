@@ -63,6 +63,18 @@ function createNoteEvents() {
 	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
 	notes_each = document.querySelectorAll(".page-notes .note-each")
 	
+	// Restart
+	for (var i = 0; i < notes_each.length; i++) {		
+		notes_each[i] = replaceSelf(notes_each[i])
+	}
+
+	for(let i = 0; i < notes_filter.length; i++) {	
+		notes_filter[i] = replaceSelf(notes_filter[i])
+	}
+		
+	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
+	notes_each = document.querySelectorAll(".page-notes .note-each")
+		
 	// Note Click
 	for (var i = 0; i < notes_each.length; i++) {
 		notes_each[i].addEventListener('click', function (e) {
@@ -158,6 +170,14 @@ function getNotes() {
 		return response.json()
 	}).then(data => {
 		if (data.status == 0) {
+			notes_content = [{
+				"filename": null,
+				"title": null,
+				"category": null,
+				"content": null,
+				"backgroundImage": null,
+				"backgroundColor": null
+			}];
 			for (let i = 0; i < data.notes.length; i++) {
 				temp = JSON.parse(data.notes[i][1])
 				temp2 = ejs_templates["deleteNote"]
@@ -195,20 +215,20 @@ function openNote(filename) {
 	togglePagePopup("read")
 	noteBeginInterval(filename)
 
-	var result = notes_content.filter(obj => {
-		return obj.filename === filename
+	notes_content.filter(obj => {
+		if (obj.filename === filename) {
+			tinymce.get("tinymce-note").setContent("" + obj.content)
+			notes_opened = obj.filename
+			document.getElementById('note-current-title').setAttribute("value", obj.title)
+			document.getElementById("note-category").setAttribute("value", obj.category)
+			document.getElementById('note-current-title').value = obj.title
+			document.getElementById("note-category").value = obj.category
+			document.getElementById("note-image-color-value").value = obj.backgroundColor
+			notes_image_placeholder.setAttribute("src", obj.backgroundImage)
+		}
 	})
 		
-	tinymce.get("tinymce-note").setContent(result[0].content)
-
-	notes_opened = result[0].filename
-	document.getElementById('note-current-title').setAttribute("value", result[0].title)
-	document.getElementById("note-category").setAttribute("value", result[0].category)
-	document.getElementById('note-current-title').value = result[0].title
-	document.getElementById("note-category").value = result[0].category
 	document.getElementById("note-category").classList.add("isEmpty")
-	document.getElementById("note-image-color-value").value = result[0].backgroundColor
-	notes_image_placeholder.setAttribute("src", result[0].backgroundImage)
 
 	document.getElementById('note-current-title').addEventListener('input', function() {
 		this.style.width = (this.value.length + 3) + 'ch'
@@ -238,9 +258,6 @@ function newNote() {
 			popupMessage(0, data.message)
 			temp2 = ejs_templates["deleteNote"]
 			temp2 = temp2.replace("replace_filename", data.note.filename + ".json")
-			if (temp.category != null) {
-				notes_filter_array.push(temp.category)
-			}
 			notes_deposit.insertAdjacentHTML("beforeend", `
 			<div class="note-each lag" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundColor + `;">
 				<img class="backgroundImage" onerror="this.style.display='none'" src="">
@@ -257,7 +274,6 @@ function newNote() {
 				"backgroundImage": "",
 				"backgroundColor": data.note.backgroundColor
 			})
-			createNoteFilters()
 			createNoteEvents()
 		} else {
 			popupMessage(2, data.message)
@@ -266,8 +282,8 @@ function newNote() {
 }
 
 // Update Note
-async function updateNote(callout) {
-	console.log('%c Updating Notes', 'color: #6D94DB');
+async function updateNote() {
+	console.log('%c Info: Updating Notes', 'color: #6D94DB');
 
 	var query = `
 	{
@@ -283,16 +299,16 @@ async function updateNote(callout) {
 	document.getElementById('note-category').setAttribute("value", document.getElementById('note-category').value)
 	document.getElementById('note-current-title').setAttribute("value", document.getElementById('note-current-title').value)
 
-	var result = notes_content.filter(obj => {
-		return obj.filename === notes_opened
+	notes_content.filter(obj => {
+		if (obj.filename === notes_opened) {
+			obj.title = document.getElementById("note-current-title").value
+			obj.category = document.getElementById("note-category").value
+			obj.content = tinymce.get("tinymce-note").getContent()
+			obj.backgroundImage = notes_image_placeholder.getAttribute("src")
+			obj.backgroundColor = document.getElementById("note-image-color-value").value
+		}
 	})
 
-	result[0]["title"] = document.getElementById("note-current-title").value
-	result[0]["category"] = document.getElementById("note-category").value
-	result[0]["content"] = tinymce.get("tinymce-note").getContent()
-	result[0]["backgroundImage"] = notes_image_placeholder.getAttribute("src")
-	result[0]["backgroundColor"] = document.getElementById("note-image-color-value").value
-	
 	await fetch("http://localhost:3000/api/note/", {
 		method: "PUT",
 		headers: {
@@ -303,9 +319,7 @@ async function updateNote(callout) {
 	}).then(response => {
 		return response.json()
 	}).then(data => {
-		if (data.status == 1) {
-			popupMessage(1, data.message)
-		}
+
 	})	
 }
 
@@ -332,8 +346,16 @@ function deleteNote(filename) {
 		if (data.status == 0) {
 			popupMessage(0, data.message)
 			document.getElementById(filename).remove()
+			
+			notes_content.filter(obj => {
+				if (obj.filename === notes_opened) {
+					delete obj;
+				}
+			})
 			notes_filter_array = []
 			createNoteFilters()
+			createNoteEvents()
+			notes_opened = null
 		}
 	})	
 }
@@ -343,8 +365,8 @@ function noteBeginInterval(filename) {
 	notes_interval = setInterval(updateNote, 5000);
 }
 
-function noteEndInterval() {
-	updateNote()
+async function noteEndInterval() {
+	await updateNote()
 	clearInterval(notes_interval);
 	notes_opened = null;
 	document.getElementById('note-title').removeEventListener("input", function() {});

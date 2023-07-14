@@ -92,6 +92,7 @@
 	gap: 10px;
 	backdrop-filter: unset;
 	background-color: transparent;
+	box-shadow: 0 4px 4px rgba(0,0,0,0.1);
 }
 
 .weather #weather-phrase {
@@ -104,12 +105,23 @@
 }
 
 .weather #weather-icon {
-    height: 50px;
-    width: 50px;
+    height: calc(100% - 40px);
+    width: auto;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .weather .weather-main {
-	flex-direction: row-reverse;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.weather .weather-spec {
+    justify-content: flex-end;
+    width: 100%;
+    gap: 10px;
 }
 
 }
