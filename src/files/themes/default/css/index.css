@@ -203,6 +203,15 @@ body {
     margin-bottom: 48px;
 }
 
+.page-each .page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+	margin-bottom: 20px;
+	height: calc(100% - 40px);
+}
+
 .page-each .page-container h1 {
     font-size: var(--bigfont);
 }
@@ -215,25 +224,6 @@ body {
 	gap: 10px;
 }
 	
-}
-
-@media (max-width: 500px) {
-
-.page-each .page-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-	margin-bottom: 20px;
-	height: calc(100% - 40px);
-}
-
-.page-each .overlay.full .content {
-    width: 100%;
-	height: calc(100% - 48px);
-	border-radius:0;
-}
-
 .page-each .overlay .content-header > div {
     width: 100%;
     align-content: flex-start;
@@ -272,6 +262,12 @@ body {
 .page-each .overlay .content-header > img {
 	position: absolute;
     right: 20px;
+}
+
+.page-each .overlay.full .content {
+    width: 100%;
+	height: calc(100% - 48px);
+	border-radius:0;
 }
 
 }

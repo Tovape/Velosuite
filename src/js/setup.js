@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
 	calcHeight(null, true)
+	popup_gradient_icon_dom.setAttribute("src", popup_content_icon_arr[0])
 });
 
 /* Slides */
@@ -57,7 +58,7 @@ function backSlide(dom) {
 		popup_content_pos+= 100;
 	}
 	popup_content_dom.style.left = popup_content_pos + "%";
-	popup_gradient_icon_dom.setAttribute("src", popup_content_icon_arr[dom.getAttribute("pos")])
+	popup_gradient_icon_dom.setAttribute("src", popup_content_icon_arr[parseInt(dom.getAttribute("pos"))])
 	calcHeight(dom)
 }
 

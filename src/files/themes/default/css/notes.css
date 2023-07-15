@@ -30,6 +30,11 @@
     z-index: 1;
 }
 
+.page-notes .page-container .content .note-each.dark .title, 
+.page-notes .page-container .content .note-each.dark .date {
+	color:white;
+}
+
 .page-notes .page-container .content .note-each .backgroundImage {
 	position: absolute;
     top: 10px;
@@ -74,8 +79,8 @@
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 
-.page-notes .overlay.read .content-main > .button,
-.page-notes .overlay.read .content-main > .input input {
+.page-notes .overlay .content-main > .button,
+.page-notes .overlay .content-main > .input input {
 	height: 45px;
 	width: 100%;
 	box-sizing: border-box;

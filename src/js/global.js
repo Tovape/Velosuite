@@ -1,4 +1,7 @@
 // Global Variables
+var temp1 = null;
+var temp2 = null;
+var temp3 = null;
 var popup_message_dom = null;
 var popup_color_dom = null;
 var popup_text_dom = null;
@@ -79,4 +82,49 @@ function replaceSelf(node) {
 	node.replaceWith(clone);
 
 	return clone;
+}
+
+// Regex Check
+function checkRegex(input) {
+	if (input.includes("/")) { return false; }
+	if (input.includes("'")) { return false; }
+	if (input.includes("\"")) { return false; }
+	if (input.includes("/")) { return false; }
+	return true;
+}
+
+// Detect Image Dark/Light
+function getImageBrightness(image, dom) {
+	if (image !== null) {
+		var img = document.createElement("img");
+		img.src = image.getAttribute("src")
+
+		var colorSum = 0;
+		
+		var canvas = document.createElement("canvas");
+		canvas.width = 210;
+		canvas.height = 210;
+
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(image,0,0);
+
+		var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+		var data = imageData.data;
+		var r,g,b,avg;
+
+		  for(var x = 0, len = data.length; x < len; x+=4) {
+			r = data[x];
+			g = data[x+1];
+			b = data[x+2];
+
+			avg = Math.floor((r+g+b)/3);
+			colorSum += avg;
+		}
+
+		var brightness = Math.floor(colorSum / (image.width*image.height));
+
+		if(brightness < 127.5){
+			dom.classList.add("dark")
+		}
+	}
 }

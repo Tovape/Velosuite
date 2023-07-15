@@ -6,7 +6,9 @@ var notes_delay;
 var notes_filter_array = [];
 var notes_interval = null;
 var notes_opened = null;
+var notes_title = null;
 var notes_image = null;
+var notes_color = null;
 var notes_image_placeholder = null;
 var notes_content = [{
 	"filename": null,
@@ -18,28 +20,35 @@ var notes_content = [{
 }];
 
 document.addEventListener("DOMContentLoaded", function(event) {
+	notes_title = document.getElementById("note-title")
 	notes_deposit = document.getElementById("notes-deposit")
 	notes_image = document.getElementById("note-image-image-value")
+	notes_color = document.getElementById("note-image-color-value")
 	notes_image_placeholder = document.getElementById("note-image-image-placeholder")
 
 	tinymce.init({
 		selector: "#tinymce-note"
 	});
 	
-	notes_image.addEventListener("change", function (e) {
+	notes_image.addEventListener("change", function (e) {		
 		const inputTarget = e.target;
 		const file = inputTarget.files[0];
 
 		if (file) {
-			const reader = new FileReader();
+			if(file.size > 2097152){
+				popupMessage(2, "Image is too big")
+				file.value = "";
+			} else {
+				const reader = new FileReader();
 
-			reader.addEventListener("load", function (e) {
-				const readerTarget = e.target;
-				notes_image_placeholder.setAttribute("src", readerTarget.result)
-				notes_image_placeholder.classList.add("active")
-			});
+				reader.addEventListener("load", function (e) {
+					const readerTarget = e.target;
+					notes_image_placeholder.setAttribute("src", readerTarget.result)
+					notes_image_placeholder.classList.add("active")
+				});
 
-			reader.readAsDataURL(file);
+				reader.readAsDataURL(file);
+			}
 		}
 	});
 });
@@ -146,6 +155,11 @@ function createNoteEvents() {
 
 // Note Filters Listeners
 function createNoteFilters() {
+	temp = document.querySelectorAll(".page-notes .header-filters .note-filter > .selection-each:not(:first-child)")
+	for (let i = 0; i < temp.length; i++) {
+		temp[i].remove()
+	}
+	
 	temp = [...new Set(notes_filter_array)];
 	for (let i = 0; i < temp.length; i++) {
 		if (temp[i] != "" && temp[i] != undefined && temp[i] != null) {
@@ -159,7 +173,7 @@ function createNoteFilters() {
 }
 
 // Get Notes
-function getNotes() {
+async function getNotes() {
 	fetch("http://localhost:3000/api/note/", {
 		method: "GET",
 		headers: {
@@ -182,9 +196,8 @@ function getNotes() {
 				temp = JSON.parse(data.notes[i][1])
 				temp2 = ejs_templates["deleteNote"]
 				temp2 = temp2.replace("replace_filename", data.notes[i][0])
-				if (temp.category != null) {
-					notes_filter_array.push(temp.category)
-				}
+				if (temp.category != null) { notes_filter_array.push(temp.category) }
+				
 				notes_deposit.insertAdjacentHTML("beforeend", `
 				<div class="note-each lag" creationDate="` + temp.creationDate + `" modifiedDate="` + temp.modifiedDate + `" category="` + temp.category + `" id="` + data.notes[i][0] + `" style="background-color: ` + temp.backgroundColor + `;">
 					<img class="backgroundImage" onerror="this.style.display='none'" src="` + temp.backgroundImage + `">
@@ -193,6 +206,9 @@ function getNotes() {
 					` + temp2 + `
 				</div>	
 				`)
+	
+				getImageBrightness(document.getElementById(data.notes[i][0]).querySelector("img"), document.getElementById(data.notes[i][0]))
+
 				notes_content.push({
 					"filename": data.notes[i][0],
 					"title": temp.title,
@@ -223,8 +239,11 @@ function openNote(filename) {
 			document.getElementById("note-category").setAttribute("value", obj.category)
 			document.getElementById('note-current-title').value = obj.title
 			document.getElementById("note-category").value = obj.category
-			document.getElementById("note-image-color-value").value = obj.backgroundColor
-			notes_image_placeholder.setAttribute("src", obj.backgroundImage)
+			notes_color.value = obj.backgroundColor
+			if (obj.backgroundImage !== "" && obj.backgroundImage !== null) {
+				notes_image_placeholder.setAttribute("src", obj.backgroundImage)
+				notes_image_placeholder.classList.add("active")
+			}
 		}
 	})
 		
@@ -239,46 +258,51 @@ function openNote(filename) {
 // New Note
 function newNote() {
 	temp = document.querySelector(".page-notes input[name='note-title']")
-	var query = `
-		{
-			"title": "` + temp.value + `"
-		}
-	`;
-	fetch("http://localhost:3000/api/note/", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			"Accept": "application/json"
-		},
-		body: query
-	}).then(response => {
-		return response.json()
-	}).then(data => {
-		if (data.status == 0) {
-			popupMessage(0, data.message)
-			temp2 = ejs_templates["deleteNote"]
-			temp2 = temp2.replace("replace_filename", data.note.filename + ".json")
-			notes_deposit.insertAdjacentHTML("beforeend", `
-			<div class="note-each lag" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundColor + `;">
-				<img class="backgroundImage" onerror="this.style.display='none'" src="">
-				<p class="title">` + data.note.title + `</p>
-				<p class="date">` + data.note.modifiedDate + `</p>
-				` + temp2 + `
-			</div>	
-			`)
-			notes_content.push({
-				"filename": data.note.filename + ".json",
-				"title": data.note.title,
-				"category": "",
-				"content": "",
-				"backgroundImage": "",
-				"backgroundColor": data.note.backgroundColor
-			})
-			createNoteEvents()
-		} else {
-			popupMessage(2, data.message)
-		}
-	})
+	
+	if (!checkRegex(temp.value)) {
+		popupMessage(2, "Do not include slashes or quotes")
+	} else {
+		var query = `
+			{
+				"title": "` + temp.value + `"
+			}
+		`;
+		fetch("http://localhost:3000/api/note/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accept": "application/json"
+			},
+			body: query
+		}).then(response => {
+			return response.json()
+		}).then(data => {
+			if (data.status == 0) {
+				popupMessage(0, data.message)
+				temp2 = ejs_templates["deleteNote"]
+				temp2 = temp2.replace("replace_filename", data.note.filename + ".json")
+				notes_deposit.insertAdjacentHTML("beforeend", `
+				<div class="note-each lag" creationDate="` + data.note.creationDate + `" modifiedDate="` + data.note.modifiedDate + `" category="` + data.note.category + `" id="` + data.note.filename + `.json" style="background-color: ` + data.note.backgroundColor + `;">
+					<img class="backgroundImage" onerror="this.style.display='none'" src="">
+					<p class="title">` + data.note.title + `</p>
+					<p class="date">` + data.note.modifiedDate + `</p>
+					` + temp2 + `
+				</div>	
+				`)
+				notes_content.push({
+					"filename": data.note.filename + ".json",
+					"title": data.note.title,
+					"category": "",
+					"content": "",
+					"backgroundImage": "",
+					"backgroundColor": data.note.backgroundColor
+				})
+				createNoteEvents()
+			} else {
+				popupMessage(2, data.message)
+			}
+		})
+	}
 }
 
 // Update Note
@@ -291,7 +315,7 @@ async function updateNote() {
 		"title": "` + document.getElementById("note-current-title").value + `",
 		"category": "` + document.getElementById("note-category").value + `",
 		"content": ` + JSON.stringify(tinymce.get("tinymce-note").getContent()) + `,
-		"backgroundColor": "` + document.getElementById("note-image-color-value").value + `",
+		"backgroundColor": "` + notes_color.value + `",
 		"backgroundImage": ` + JSON.stringify(notes_image_placeholder.getAttribute("src")) + `
 	}
 	`;	
@@ -305,7 +329,7 @@ async function updateNote() {
 			obj.category = document.getElementById("note-category").value
 			obj.content = tinymce.get("tinymce-note").getContent()
 			obj.backgroundImage = notes_image_placeholder.getAttribute("src")
-			obj.backgroundColor = document.getElementById("note-image-color-value").value
+			obj.backgroundColor = notes_color.value
 		}
 	})
 
@@ -353,8 +377,8 @@ function deleteNote(filename) {
 				}
 			})
 			notes_filter_array = []
-			createNoteFilters()
-			createNoteEvents()
+			getNotes()
+			notes_deposit.innerHTML = "";
 			notes_opened = null
 		}
 	})	
@@ -369,22 +393,16 @@ async function noteEndInterval() {
 	await updateNote()
 	clearInterval(notes_interval);
 	notes_opened = null;
-	document.getElementById('note-title').removeEventListener("input", function() {});
+	notes_title.removeEventListener("input", function() {});
 	document.getElementById('note-current-title').removeEventListener("input", function() {});
 	document.getElementById('note-category').removeEventListener("input", function() {});
-	
-	temp = document.querySelectorAll(".page-notes .header-filters .note-filter > .selection-each:not(:first-child)")
-	for (let i = 0; i < temp.length; i++) {
-		temp[i].remove()
-	}
-	
+		
 	setTimeout(function(){
-		document.getElementById("note-image-image-value").value = ""
-		document.getElementById("note-image-color-value").value = ""
+		notes_image.value = ""
+		notes_color.value = ""
 		notes_image_placeholder.setAttribute("src", "")
 		notes_filter_array = []
 		getNotes()
-		createNoteFilters()
 		notes_deposit.innerHTML = "";
 	}, 150);
 }

@@ -3,7 +3,7 @@
 	<div value="Image">
 		<img class="close" onclick="closeColorSelector()" src="../files/themes/default/icons/global/close.svg">
 		<img class="remove" onclick="deleteImageSelector()" src="../files/themes/default/icons/global/delete-white.svg">
-		<img class="placeholder" onerror="this.style.display='none'" id="<%= name %>-image-placeholder" src="">
+		<img class="placeholder" onerror="this.classList.remove('active'); this.style.display='none'" id="<%= name %>-image-placeholder" src="">
 		<div>
 			<input type="file" name="<%= name %>-image-value" id="<%= name %>-image-value" />
 		</div>

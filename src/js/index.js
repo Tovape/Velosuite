@@ -1,6 +1,4 @@
 /* Global Variables */
-var temp = null;
-var temp2 = null;
 var inputs = null;
 var theme_selected = null;
 
@@ -38,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	for(let i = 0; i < navigator_each.length; i++) {
 		navigator_each[i].addEventListener("click", function() {
 			page_last = page_active
-			temp = navigator_each[i].getAttribute("value")
-			if (!(page_active == temp)) {
-				page_active = temp
-				togglePage(temp)
+			temp1 = navigator_each[i].getAttribute("value")
+			if (!(page_active == temp1)) {
+				page_active = temp1
+				togglePage(temp1)
 			} else {
 				page_active = "home"
-				page_last = temp
+				page_last = temp1
 				togglePage("home")
 			}
 		});
@@ -108,6 +106,6 @@ function themeChange() {
 
 // Toggle Page Popup
 function togglePagePopup(page) {
-	temp = document.querySelector(".page-each.active .overlay."+page)
-	temp.classList.toggle("active")
+	temp1 = document.querySelector(".page-each.active .overlay."+page)
+	temp1.classList.toggle("active")
 }

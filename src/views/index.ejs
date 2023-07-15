@@ -6,6 +6,7 @@
 	<%- 
 	include('./components/head.ejs', {theme_name: theme_name})
 	-%>
+	
 	<!-- Index -->
 	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/css/index.css">
 	<link rel="stylesheet" type="text/css" href="../files/themes/<%= theme_name %>/css/notes.css">
@@ -17,7 +18,6 @@
 	<script type="text/javascript" src="../js/weather.js"></script>
 	<script type="text/javascript" src="../js/notes.js"></script>
 	<script type="text/javascript" src="../js/settings.js"></script>
-	<script type="text/javascript" src="../files/themes/<%= theme_name %>/js/index.js"></script>
 </head>
 
 <body style="background-image:url(../files/themes/<%= theme_name %>/images/background_min.jpg);">
@@ -87,7 +87,7 @@ include(`../files/themes/${theme_name}/components/navigator.ejs`, {theme_name: t
 <script>
 
 // EJS Template Content for Separate JS File
-var temp3 = null;
+
 var ejs_templates = {};
 
 temp3 = ejs.render(`

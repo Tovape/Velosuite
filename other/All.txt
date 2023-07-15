@@ -179,13 +179,3 @@ this will be called by ejs include and a parameter from NodeJS which is the acti
 since it will be better, it's just downloading a folder and removing it from the user interface
 this app will need a dev section with some button to empty cache
 
-Todo:
-	Code:
-	Add background image load in the background and at next page reload take that image instead of the min compressed one, like a global cache function, check if there is size enough to store stuff like fonts (max priority), images etc
-	Draggable windows (Won't do it probably)
-	
-	Design:
-	Add showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
-
-Notes:
-	MongoDB creates the table and the database if they dont exist (Removed)

@@ -1,4 +1,4 @@
-<button pos="<% if (locals.pos) { %> <%= pos %> <% } %>" onclick="<%= action %>" class="<%= className + " " + context %>">
+<button pos="<% if (locals.pos || locals.pos == 0) { %> <%= pos %> <% } %>" onclick="<%= action %>" class="<%= className + " " + context %>">
 <% if(context == "continue") { %>
 	<%= context %>
 	<img src="../files/themes/default/icons/global/arrow-1-right.svg">
