@@ -20,6 +20,7 @@ var lock_setup = false;
 var theme_selected = 0;
 var theme_list = [];
 var theme_name = "default";
+var clock_selected = "digital";
 var weather_selected = "celsius";
 var weather_units = ["celsius", "fahrenheit"]
 var general = null;
@@ -60,7 +61,7 @@ app.get("/login", (req, res) => {
 })
 
 function resIndex(req, res) {
-	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name, weather_units: weather_units, weather_selected: weather_selected })
+	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name, weather_units: weather_units, weather_selected: weather_selected, clock_selected: clock_selected })
 }
 
 function resSetup(req, res) {
@@ -111,6 +112,9 @@ export function changeTheme(theme) { theme_name = theme; }
 
 // Weather
 export function changeWeather(weather) { weather_selected = weather; }
+
+// Clock
+export function changeClock(clock) { clock_selected = clock; }
 
 // Other
 app.listen(port)

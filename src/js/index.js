@@ -104,6 +104,37 @@ function themeChange() {
 	})
 }
 
+// Change Clock Fetch
+function clockChange() {
+	var style = document.querySelector(".selection input[name=clock-active]:checked").value
+	console.log("%c Info: Changing Clock", 'color: #6D94DB');
+	var query = `
+		{
+			"style": "` + style + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/ctrl/changeClock", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		if (!response.ok) {
+			popupMessage(2, "Clock Error")
+		}
+		return response.json()
+	}).then(data => {
+		popupMessage(0, "Clock Changed")
+		if (data.status == 0) {
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
+		}
+	})
+}
+
 // Toggle Page Popup
 function togglePagePopup(page) {
 	temp1 = document.querySelector(".page-each.active .overlay."+page)

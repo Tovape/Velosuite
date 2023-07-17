@@ -2,6 +2,7 @@
 var temp1 = null;
 var temp2 = null;
 var temp3 = null;
+var theme = null;
 var popup_message_dom = null;
 var popup_color_dom = null;
 var popup_text_dom = null;
@@ -9,6 +10,7 @@ var popup_text_dom = null;
 document.addEventListener("DOMContentLoaded", function(event) {
 	console.log('%c Velosuite', 'color: #FFFFFF');
 	
+	theme = document.getElementById("theme-selected").getAttribute("value")
 	popup_message_dom = document.getElementById("popup-message")
 	popup_color_dom = document.getElementById("popup-color")
 	popup_text_dom = document.getElementById("popup-text")

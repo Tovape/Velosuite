@@ -40,19 +40,10 @@ a {
 	display: block;
 }
 
-p, a, h1, h2, h3 {
+p, a, h1, h2, h3, li, ol, ul {
 	margin: 0;
+	padding: 0;
 }
-
-li {
-	margin: 0;
-}
-
-ol,ul {
-	margin: 0;
-	padding-left: 20px;
-}
-
 
 /* Scrollbar */
 

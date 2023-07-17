@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	notes_image_placeholder = document.getElementById("note-image-image-placeholder")
 
 	tinymce.init({
-		selector: "#tinymce-note"
+		selector: "#tinymce-note",
+		plugins: 'link'
 	});
 	
 	notes_image.addEventListener("change", function (e) {		

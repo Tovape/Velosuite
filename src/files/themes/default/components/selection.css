@@ -4,12 +4,27 @@
     align-items: center;
     padding: 6px;
 	width: fit-content;
-    border-radius: 99px;
-    gap: 10px;
+	position: relative;
+	border-radius: 14px;
+    gap: 6px;
 	background-color: var(--white-1);
+	--left: 0px;
 }
 
-.selection .selection-each input[type=radio] {
+.selection-1::before {
+    content: "";
+    border-radius: 10px;
+    top: 6px;
+    left: calc(var(--left) + 6px);
+    height: 53px;
+    width: 130px;
+    position: absolute;
+    background-color: var(--black-1);
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+}
+
+.selection-1 .selection-each input[type=radio] {
 	width: 100%;
 	height: 100%;
 	z-index: 2;
@@ -19,21 +34,19 @@
 
 .selection-1 .selection-each {
 	position: relative;
+	width: 130px;
 }
 
 .selection-1 .selection-each label {
 	display: block;
 	text-transform: capitalize;
     padding: 16px 40px;
-	border-radius: 99px;
-	background-color: var(--white-1);
 	color: var(--black-1);
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;
 }
 
 .selection-1 .selection-each input[type=radio]:checked + label {
-	background-color: var(--black-1);
 	color: var(--white-1);
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;

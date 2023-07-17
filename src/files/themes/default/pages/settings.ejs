@@ -17,7 +17,17 @@
 		</div>
 		<div class="page-content">
 			<div class="page-content-each active" value="home">
-				
+				<div>
+					<h2>Clock Style</h2>
+					<div>
+						<%- 
+						include(`../components/selection.ejs`, { list: ["digital", "analog"], className: "selection selection-1", name: "clock-active", ldefault: clock_selected } ) 
+						-%>
+						<%- 
+						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "clockChange()" } ) 
+						-%>
+					</div>
+				</div>
 			</div>
 			<div class="page-content-each" value="weather">
 				<div>

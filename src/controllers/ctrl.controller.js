@@ -1,4 +1,4 @@
-import { beginSetup, endSetup, changeTheme, loadGeneral, writeGeneral, getGeneral, changeWeather } from "../server.js";
+import { beginSetup, endSetup, changeTheme, loadGeneral, writeGeneral, getGeneral, changeWeather, changeClock } from "../server.js";
 
 /* Setup Check */
 
@@ -21,6 +21,7 @@ export const ctrlSetup = async (req, res) => {
 		"password": "",
 		"theme": "default",
 		"weather": "celsius",
+		"clock": "digital",
 		"setup": true		
 	}
 
@@ -65,6 +66,24 @@ export const ctrlWeatherChange = async (req, res) => {
 	changeWeather(req.body.units)
 	
 	return res.status(200).json({message: "Weather Units Changed", status: 0})
+}
+
+/* Clock Style Change */
+
+export const ctrlClockChange = async (req, res) => {
+	if (!req.body.style) {
+		return res.status(403).json({message: "No style provided", status: 1})
+	}
+	
+	var data = getGeneral();
+	
+	data.clock = req.body.style
+	
+	writeGeneral(data)
+	loadGeneral()
+	changeClock(req.body.style)
+	
+	return res.status(200).json({message: "Clock Style Changed", status: 0})
 }
 
 /* Generate Random String */
