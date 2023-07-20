@@ -14,6 +14,7 @@
 			<p value="health" pos="4">Health</p>
 			<p value="timeline" pos="5">Timeline</p>
 			<p value="themes" pos="6">Themes</p>
+			<p value="general" pos="7">General</p>
 		</div>
 		<div class="page-content">
 			<div class="page-content-each active" value="home">
@@ -21,7 +22,7 @@
 					<h2>Clock Style</h2>
 					<div>
 						<%- 
-						include(`../components/selection.ejs`, { list: ["digital", "analog"], className: "selection selection-1", name: "clock-active", ldefault: clock_selected } ) 
+						include(`../components/selection.ejs`, { list: ["digital", "analog"], className: "selection selection-1", name: "clock-active", defaults: clock_selected } ) 
 						-%>
 						<%- 
 						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "clockChange()" } ) 
@@ -34,7 +35,7 @@
 					<h2>Weather Units</h2>
 					<div>
 						<%- 
-						include(`../components/selection.ejs`, { list: weather_units, className: "selection selection-1", name: "weather-active", ldefault: weather_selected } ) 
+						include(`../components/selection.ejs`, { list: weather_units, className: "selection selection-1", name: "weather-active", defaults: weather_selected } ) 
 						-%>
 						<%- 
 						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "weatherChange()" } ) 
@@ -56,10 +57,24 @@
 					<p>To install themes, download one from the <a href="#">theme explorer</a> and drag the folder to Velosuite/src/files/themes/</p>
 					<div>
 						<%- 
-						include(`../components/selection.ejs`, { list: theme_list, className: "selection selection-1", name: "theme-active", ldefault: theme_name } ) 
+						include(`../components/selection.ejs`, { list: theme_list, className: "selection selection-1", name: "theme-active", defaults: theme_name } ) 
 						-%>
 						<%- 
 						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "themeChange()" } ) 
+						-%>
+					</div>
+				</div>
+			</div>
+			<div class="page-content-each" value="general">
+				<div>
+					<h2>Password</h2>
+					<p>Add a password to enable the lock screen or leave it blank to disable it</p>
+					<div>
+						<%- 
+						include(`../components/input.ejs`, { placeholder: "Password", className: "input input-1", name: "general-password" } ) 
+						-%>
+						<%- 
+						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "clockChange()" } ) 
 						-%>
 					</div>
 				</div>

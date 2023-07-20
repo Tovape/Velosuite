@@ -5,6 +5,7 @@
     justify-content: space-between;
 	gap: 30px;
 	text-align: center;
+	font-family: var(--poppins);
 	overflow: hidden;
 	text-transform: capitalize;
 	border-radius: 14px;

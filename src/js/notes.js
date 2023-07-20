@@ -84,6 +84,8 @@ function createNoteEvents() {
 		
 	notes_filter = document.querySelectorAll(".page-notes .note-filter .selection-each > input")
 	notes_each = document.querySelectorAll(".page-notes .note-each")
+	
+	selectionRestart()
 		
 	// Note Click
 	for (var i = 0; i < notes_each.length; i++) {
@@ -109,7 +111,6 @@ function createNoteEvents() {
 			}
 		});
 	}
-	document.querySelector(".page-notes .header-filters .note-filter .selection-each input[value='All']").click()
 	
 	// Note Hold
 	for (var i = 0, j = notes_each.length; i < j; i++) {
@@ -167,6 +168,9 @@ function createNoteFilters() {
 			temp2 = document.querySelector(".page-notes .header-filters .note-filter .selection-each").cloneNode(true);
 			temp2.querySelector("input").setAttribute("value", temp[i])
 			temp2.querySelector("input").setAttribute("id", temp[i])
+			temp2.querySelector("input").removeAttribute("checked")
+			temp3 = parseInt(temp2.querySelector("input").getAttribute("pos")); temp3++;
+			temp2.querySelector("input").setAttribute("pos", temp3)
 			temp2.querySelector("label").textContent = temp[i]
 			document.querySelector(".page-notes .header-filters .note-filter").insertAdjacentHTML("beforeend", temp2.outerHTML);
 		}

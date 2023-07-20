@@ -1,7 +1,7 @@
 <div class="<%= className %>" name="<%= name %>">
 <% for (var i = 0; i < list.length; i++) { %>
 	<div class="selection-each">
-		<input pos="<%= i %>" id="<%= list[i] %>" value="<%= list[i] %>" name="<%= name %>" type="radio" <% if (locals.ldefault) { %> <% if (ldefault == list[i]) { %> checked <% } %> <% } else if (list[i] == "All") { %> checked <% } %>>
+		<input pos="<%= i %>" id="<%= list[i] %>" value="<%= list[i] %>" name="<%= name %>" type="radio" <% if (locals.defaults) { %> <% if (defaults == list[i]) { %> checked <% } %> <% } else if (list[i] == "All") { %> checked <% } %>>
 		<label for="<%= name %>"><%= list[i] %></label>
 	</div>
 <% } %>

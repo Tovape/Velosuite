@@ -137,6 +137,6 @@ function clockChange() {
 
 // Toggle Page Popup
 function togglePagePopup(page) {
-	temp1 = document.querySelector(".page-each.active .overlay."+page)
+	temp1 = document.querySelector(".page-each.active .overlay." + page)
 	temp1.classList.toggle("active")
 }

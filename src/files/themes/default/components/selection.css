@@ -39,8 +39,9 @@
 
 .selection-1 .selection-each label {
 	display: block;
+	text-align: center;
 	text-transform: capitalize;
-    padding: 16px 40px;
+    padding: 16px;
 	color: var(--black-1);
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;

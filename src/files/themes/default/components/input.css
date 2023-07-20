@@ -1,3 +1,8 @@
+.input > input,
+.input > input::placeholder {
+	font-family: var(--poppins);
+}
+
 .input-1 {
     position: relative;
 }
@@ -33,3 +38,17 @@
     color: var(--blue-2);
     font-size: var(--smafont);
 }
+
+.input-3 > input {
+	border: 1px solid var(--blue-1);
+	width: calc(100% - 76px);
+	padding: 16px 16px 16px 60px;
+	border-radius: 8px;
+}
+
+.input-3 > input,
+.input-3 > input::placeholder {
+	color: var(--blue-1);
+}
+
+.input-3 > label { display: none; }

@@ -1,4 +1,4 @@
 <div class="<%= className %>">
-	<input type="text" name="<%= name %>" id="<%= name %>">
+	<input style="background-image:url(<% if (locals.image) { %> <%= image %> <% } %>);" type="text" name="<%= name %>" id="<%= name %>">
 	<label for="<%= name %>"><%= placeholder %></label>
 </div>

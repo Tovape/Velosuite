@@ -1,0 +1,84 @@
+/* Login Page */
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login {
+	gap: 50px;
+	position: relative;
+	z-index: 2;
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+}
+
+.login .logo {
+	height: auto;
+	width: 90px;
+	object-fit: contain;
+	padding: 20px;
+	background-color: var(--white-1);
+	border-radius: 14px;
+	z-index: 2;
+}
+
+.login .login-content {
+	width: 500px;
+	padding: 40px;
+	border-radius: 14px;
+	background-color: var(--white-1);
+	box-shadow: 0 0 30px 30px rgba(0,0,0,0.02);
+}
+
+.login .login-content .title {
+	text-align:center;
+	color: var(--blue-2);
+	font-weight: bold;
+	font-family: var(--poppins);
+	font-size: var(--undfont);
+}
+
+.login .login-content .description {
+	text-align:center;
+	font-size: var(--smafont);
+	color: var(--gray-1);
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+.login .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login .login-form input {
+	background-position: 20px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.login .login-form button {
+    width: 100%;
+    padding: 16px 0;
+    justify-content: center;
+    border-radius: 8px;
+}

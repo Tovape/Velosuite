@@ -75,6 +75,8 @@
 	font-family: var(--poppins);
 	font-size:var(--norfont);	
 	color: var(--gray-1);
+	margin-top: 10px;
+	line-height: 1.6;
 }
 
 .page-settings .page-container .page-content-each > div > p > a {
@@ -95,4 +97,8 @@
 
 .page-settings .page-container .page-content-each.active {
 	display: flex;
+}
+
+.page-settings .input-1 > .isEmpty + label{
+    background-color: var(--white-2);
 }

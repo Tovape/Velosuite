@@ -6,7 +6,7 @@
 			include(`../components/button.ejs`, { context: "New", className: "button button-1", action: "togglePagePopup('create')" } ) 
 			-%>
 			<%- 
-			include(`../components/selection.ejs`, { list: ["All"], className: "selection selection-1 note-filter", name: "note-active" } ) 
+			include(`../components/selection.ejs`, { list: ["All"], defaults: "All", className: "selection selection-1 note-filter", name: "note-active" } ) 
 			-%>
 		</div>
 	</div>

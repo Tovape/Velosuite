@@ -6,6 +6,7 @@
 	<%- 
 	include('./components/head.ejs', {theme_name: theme_name})
 	-%>
+	
 	<!-- Setup -->
 	<link rel="stylesheet" type="text/css" href="../css/setup.css">
 	<script type="text/javascript" src="../js/setup.js"></script>
@@ -96,6 +97,10 @@ include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
 			</div>
 		</div>
 	</div>
+</div>
+
+<div style="display:none;">
+	<p value="<%= theme_name %>" id="theme-selected"></p>
 </div>
 
 </body>
