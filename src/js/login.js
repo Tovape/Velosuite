@@ -28,16 +28,12 @@ function login() {
 		return response.json();
 	}).then(data => {
 		if (data.status == 0) {
-			setCookie('token',JSON.stringify(data),7);
-			localStorage.setItem("username", username)
 			popupMessage(0, data.message)
 			setTimeout(function(){
-				location.reload();
+				window.location.href = "/";
 			}, 1000);
 		} else {
 			popupMessage(2, data.message)
 		}
-	}).catch((err) => {
-		popupMessage(2, data.message)
-	});
+	})
 }

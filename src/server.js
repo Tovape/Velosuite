@@ -14,7 +14,6 @@ import bodyParser from "body-parser";
 import packagejson from '../package.json' assert { type: 'json' };
 import dotenv from 'dotenv';
 dotenv.config()
-const secure_api = process.env.SECURE_API
 const __dirname = path.resolve();
 const app = express();
 const port = 3000;
@@ -48,7 +47,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/ctrl", ctrlRoutes)
 
 // GET
-app.get("/", authorization (req, res) => {
+app.get("/", authorization, (req, res) => {
 	if (lock_setup) {
 		resSetup(req, res)
 	} else {
@@ -56,7 +55,7 @@ app.get("/", authorization (req, res) => {
 	}
 })
 
-app.get("/login", (req, res) => {
+app.get("/login", alreadyLogged, (req, res) => {
 	if (lock_setup) {
 		resSetup(req, res)
 	} else {
@@ -65,7 +64,6 @@ app.get("/login", (req, res) => {
 })
 
 function resIndex(req, res) {
-	res.cookie('token', secure_api, { httpOnly: false })
 	res.render('index.ejs', { theme_list: theme_list, theme_name: theme_name, weather_units: weather_units, weather_selected: weather_selected, clock_selected: clock_selected })
 }
 
@@ -96,6 +94,8 @@ export function writeGeneral(data) {
 }
 
 loadGeneral()
+
+export function secureApi() { return general.password }
 
 // Setup
 export function beginSetup() { lock_setup = true; }

@@ -90,16 +90,15 @@ function themeChange() {
 		},
 		body: query
 	}).then(response => {
-		if (!response.ok) {
-			popupMessage(2, "Theme Error")
-		}
 		return response.json()
 	}).then(data => {
-		popupMessage(0, "Theme Changed")
 		if (data.status == 0) {
+			popupMessage(0, "Theme Changed")
 			setTimeout(function(){
 				location.reload();
 			}, 1000);
+		} else {
+			popupMessage(2, data.message)
 		}
 	})
 }
@@ -121,16 +120,47 @@ function clockChange() {
 		},
 		body: query
 	}).then(response => {
-		if (!response.ok) {
-			popupMessage(2, "Clock Error")
-		}
 		return response.json()
 	}).then(data => {
-		popupMessage(0, "Clock Changed")
 		if (data.status == 0) {
+			popupMessage(0, data.message)
 			setTimeout(function(){
 				location.reload();
 			}, 1000);
+		} else {
+			popupMessage(2, data.message)
+		}
+	})
+}
+
+// Change Account Fetch
+function accountChange() {
+	var username = document.querySelector("input[name=general-username]").value
+	var password = document.querySelector("input[name=general-password]").value
+	console.log("%c Info: Changing Account", 'color: #6D94DB');
+	var query = `
+		{
+			"username": "` + username + `",
+			"password": "` + password + `"
+		}
+	`;
+	fetch("http://localhost:3000/api/ctrl/changeAccount", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		body: query
+	}).then(response => {
+		return response.json()
+	}).then(data => {
+		if (data.status == 0) {
+			popupMessage(0, data.message)
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
+		} else {
+			popupMessage(2, data.message)
 		}
 	})
 }

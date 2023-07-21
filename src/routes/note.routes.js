@@ -1,13 +1,14 @@
 import * as noteController from "../controllers/note.controller.js";
 import { Router } from "express";
+import { authorization } from "../middleware/middleware.js";
 const router = Router();
 
-router.get("/", verifyToken, noteController.getNotes)
+router.get("/", authorization, noteController.getNotes)
 
-router.post("/", verifyToken, noteController.createNote)
+router.post("/", authorization, noteController.createNote)
 
-router.put("/", verifyToken, noteController.updateNote)
+router.put("/", authorization, noteController.updateNote)
 
-router.delete("/", verifyToken, noteController.deleteNote)
+router.delete("/", authorization, noteController.deleteNote)
 
 export default router;

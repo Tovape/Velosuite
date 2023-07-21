@@ -18,7 +18,7 @@ export const ctrlSetup = async (req, res) => {
 
 	var data = {
 		"username": req.body.username,
-		"password": "",
+		"password": req.body.password,
 		"theme": "default",
 		"weather": "celsius",
 		"clock": "digital",
@@ -30,6 +30,26 @@ export const ctrlSetup = async (req, res) => {
 	endSetup()
 	console.log('\t' +  ' Setup Finished' + '\n')
 	return res.status(200).json({message: "Setup Finished", status: 0})
+}
+
+/* Account Change */
+
+export const ctrlChangeAccount = async (req, res) => {
+	if (!req.body.username) {
+		return res.status(403).json({message: "No username provided", status: 1})
+	}
+
+	var data = getGeneral();
+
+	data.username = req.body.username
+	if (req.body.password) {
+		data.password = req.body.password
+	}
+	
+	writeGeneral(data)
+	loadGeneral()
+
+	return res.status(200).json({message: "Account Updated", status: 0})
 }
 
 /* Theme Change */

@@ -39,6 +39,10 @@
     font-size: var(--smafont);
 }
 
+.input-3 {
+	position: relative;
+}
+
 .input-3 > input {
 	border: 1px solid var(--blue-1);
 	width: calc(100% - 76px);
@@ -51,4 +55,14 @@
 	color: var(--blue-1);
 }
 
-.input-3 > label { display: none; }
+.input-3 > label {
+	position:absolute;
+    display: block;
+	width: 20px;
+	height: 20px;
+	top: 20px;
+	left: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -67,14 +67,17 @@
 			</div>
 			<div class="page-content-each" value="general">
 				<div>
-					<h2>Password</h2>
-					<p>Add a password to enable the lock screen or leave it blank to disable it</p>
+					<h2>Account</h2>
+					<p>Restart your credentials here</p>
 					<div>
 						<%- 
-						include(`../components/input.ejs`, { placeholder: "Password", className: "input input-1", name: "general-password" } ) 
+						include(`../components/input.ejs`, { placeholder: "", label: "Username", className: "input input-1", name: "general-username" } ) 
 						-%>
 						<%- 
-						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "clockChange()" } ) 
+						include(`../components/input.ejs`, { placeholder: "", label: "Password", className: "input input-1", name: "general-password" } ) 
+						-%>
+						<%- 
+						include(`../components/button.ejs`, { context: "Update", className: "button button-1", action: "accountChange()" } ) 
 						-%>
 					</div>
 				</div>

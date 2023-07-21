@@ -66,10 +66,14 @@ include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
 		<div class="popup-content-account">
 			<div>
 				<p class="title">Account</p>
-				<p class="description">Tell us a little about yourself, you can lock access using a password in settings</p>
+				<p class="description">If you want to secure access from risk of data breaches, insert a password, username is required</p>
 				<br>
 				<%- 
-				include(`../files/themes/${theme_name}/components/input.ejs`, { placeholder: "Username", className: "input input-1", name: "username" } ) 
+				include(`../files/themes/${theme_name}/components/input.ejs`, { label: "Username", placeholder: "", className: "input input-1", name: "username" } ) 
+				-%>
+				<br>
+				<%- 
+				include(`../files/themes/${theme_name}/components/input.ejs`, { label: "Password", placeholder: "", className: "input input-1", name: "password" } ) 
 				-%>
 			</div>
 			<div class="popup-content-buttons">

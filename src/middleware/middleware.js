@@ -1,65 +1,58 @@
 import jwt from "jsonwebtoken";
+import { getGeneral, secureApi } from "../server.js";
 
-export const verifyToken = async (req, res, next) => {
-	try {
-		const token = req.headers["x-access-token"];
-
-		console.log(token)
-
-		if (!token) return res.status(403).json({message: "No token provided", status: 1})
-
-		const decoded = jwt.verify(token, "user-api-signed")
-		req.userId = decoded.id;
-
-		const user = await User.findById(req.userId, {password: 0})
-		if (!user) return res.status(404).json({message: "No User Found", status: 1})
-
-		next()
-	} catch (e) {
-		console.log(e)
-		return res.status(401).json({message: "Auth Error", status: 1})
-	}
-}
-
-export const authorization = (req, res, next) => {
-	
-	var token = null;
-	if (req.cookies.token) {
-		token = req.cookies.token;
-		token = ((JSON.parse(token))["token"])
-	}
-	
-	if (token == null || token == "undefined") {
-		res.redirect("/login")
+export const alreadyLogged = (req, res, next) => {
+	const data = getGeneral()
+	if (data.password == null || data.password == "undefined" || data.password == "") {
+		res.redirect('/');
 	} else {
-		try {
-			const data = jwt.verify(token, "user-api-signed");
-			if(data) {
-				next()
+		if (req.cookies.token) {
+			try {
+				const token = jwt.verify(req.cookies.token, secureApi())
+				if (token != "undefined" && token != null) {
+					if (data.password === token.password) {
+						res.redirect('/');
+					} else {
+						res.cookie('token', '', { httpOnly: false })
+						next()
+					}
+				} else {
+					res.cookie('token', '', { httpOnly: false })
+					next()
+				}
+			} catch (err) {
+				console.log(err)
 			}
-		} catch {
-			res.redirect("/login")
-			return res.sendStatus(403);
+		} else {
+			next()
 		}
 	}
 };
 
-export const alreadyLogged = (req, res, next) => {
-	var token = null;
-	if (req.cookies.token) {
-		token = req.cookies.token;
-		token = ((JSON.parse(token))["token"])
-	}
-	
-	if (token != null) {
-		const data = jwt.verify(token, "user-api-signed");
-				
-		if((data) && (Object.keys(data).length !== 0)) {
-			res.redirect("/account")
-		} else {
-			res.sendStatus(403).json({message: "An Error Accured"})
-		}
-	} else {
+export const authorization = (req, res, next) => {
+	const data = getGeneral()
+	if (data.password == null || data.password == "undefined" || data.password == "") {
 		next()
+	} else {
+		if (req.cookies.token) {
+			try {
+				const token = jwt.verify(req.cookies.token, secureApi())
+				if (token != "undefined" && token != null) {
+					if (data.password === token.password) {
+						next()
+					} else {
+						res.cookie('token', '', { httpOnly: false })
+						res.redirect('/login');
+					}
+				} else {
+					res.cookie('token', '', { httpOnly: false })
+					res.redirect('/login');
+				}
+			} catch (err) {
+				console.log(err)
+			}
+		} else {
+			res.redirect('/login');
+		}
 	}
 };

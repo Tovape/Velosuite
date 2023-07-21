@@ -3,6 +3,6 @@ Todo:
 Add
 	Add showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
 	Add somehow the animation from smart mirrors (graph)
-	Add password locking
+	Add Analog clock
 Style
 	Settings Page

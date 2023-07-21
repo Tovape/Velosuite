@@ -14,6 +14,10 @@
 
 <body style="background-image:url(../files/themes/<%= theme_name %>/images/login.jpg);">
 
+<%- 
+include(`../files/themes/${theme_name}/components/popupmessage.ejs`)
+%>
+
 <div class="login">
 	<img class="logo" src="./files/images/logo/logo-icon.svg">
 	<div class="login-content">
@@ -21,10 +25,10 @@
 		<p class="description">Enter your credentials to access your account</p>
 		<div class="login-form">
 		<%- 
-		include(`../files/themes/${theme_name}/components/input.ejs`, { image: `./files/themes/${theme_name}/icons/global/user-blue.svg`, placeholder: "Username", className: "input input-3", name: "login-username" } ) 
+		include(`../files/themes/${theme_name}/components/input.ejs`, { image: `./files/themes/${theme_name}/icons/global/user-blue.svg`, label: "", placeholder: "Username", className: "input input-3", name: "login-username" } ) 
 		-%>
 		<%- 
-		include(`../files/themes/${theme_name}/components/input.ejs`, { image: `./files/themes/${theme_name}/icons/global/lock-blue.svg`, placeholder: "Password", className: "input input-3", name: "login-password" } ) 
+		include(`../files/themes/${theme_name}/components/input.ejs`, { image: `./files/themes/${theme_name}/icons/global/lock-blue.svg`, label: "", placeholder: "Password", className: "input input-3", name: "login-password" } ) 
 		-%>
 		<%- 
 		include(`../files/themes/${theme_name}/components/button.ejs`, { context: "Sign in", className: "button button-1", action: "login()" } ) 

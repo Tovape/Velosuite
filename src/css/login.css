@@ -70,15 +70,22 @@ body {
     gap: 20px;
 }
 
-.login .login-form input {
-	background-position: 20px;
-    background-repeat: no-repeat;
-    background-size: 20px;
-}
-
 .login .login-form button {
     width: 100%;
     padding: 16px 0;
     justify-content: center;
     border-radius: 8px;
+}
+
+@media (max-width: 500px) {
+
+.login {
+	width: calc(100% - 20px);	
+}
+
+.login .login-content {
+	width: 100%;
+	padding: 80px 40px;
+}
+
 }

@@ -1,32 +1,23 @@
 import jwt from "jsonwebtoken";
+import { getGeneral, secureApi } from "../server.js";
 
-export const signUp = async (req, res) => {
-	const { username, email, password, roles } = req.body;
+export const signIn = async (req, res) => {
+	const { username, password } = req.body;
 
-	const newUser = new User({
-		username,
-		email,
-		password: await User.encryptPassword(password)
-	})
-	
-	newUser.saved = [{}]
-	newUser.upvoted = [{}]
-	newUser.downvoted = [{}]
-	
-	if (roles) {
-		const foundRoles = await Role.find({name: {$in: roles}})
-		newUser.roles = foundRoles.map(role => role._id)
-	} else {
-		const role = await Role.find({name: "user"})
-		newUser.roles = [role._id]
+	const data = getGeneral()
+
+	if (data.password !== password) { 
+		return res.json({ message: "Wrong Password", status: 1 }) 
 	}
 	
-	const savedUser = await newUser.save()
-	console.log(newUser)
+	if (data.username !== username) { 
+		return res.json({ message: "Wrong Username", status: 1 }) 
+	}
 	
-	const token = jwt.sign({id: savedUser._id}, "user-api-signed", {
+	const token = jwt.sign({password: data.password}, secureApi(), {
 		expiresIn: 84600
 	})
-	
-	res.status(200).json({token: token, message: "User Created", "userId": savedUser._id})
+
+	res.cookie('token', token, { httpOnly: false })
+	return res.status(200).json({ status: 0, message: "Logged In" })
 }
