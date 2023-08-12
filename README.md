@@ -2,11 +2,12 @@
 
 ## Velosuite
 
-Manager Suite for Tasks
+Manager Suite for Tasks.
+The project is in development
 
 ---
 Stack:
-HTML | CSS | JS | NodeJS | PWA | TinyMCE | FS | JWT
+HTML | CSS | JS | EJS | NodeJS | PWA | TinyMCE | FS | JWT
 
 ![Captura web_15-7-2023_151610_localhost](https://github.com/Tovape/Velosuite/assets/49490716/0dcafec3-8784-4a5e-a7f2-118f103daa5f)
 
