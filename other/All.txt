@@ -7,7 +7,7 @@ This app is for discipline and organizing life, for a more productive oriented a
 Must be bundled and easy to deploy
 
 Stack:
-HTML | CSS | JS | NodeJS | PWA | TinyMCE | FS | JWT
+HTML | CSS | JS | EJS | NodeJS | PWA | TinyMCE | FS | JWT
 
 Desirable Environment:
 Self Hosting
@@ -113,7 +113,10 @@ https://www.amcharts.com/
 https://minimals.cc/dashboard/app
 https://mira.bootlab.io/dashboard/analytics
 https://berrydashboard.io/dashboard/default
-GoPro Awards: Million Dollar Challenge Highlight 
+GoPro Awards: Million Dollar Challenge Highlight
+https://play.google.com/store/apps/details?id=com.prosper.routines.todo.productive.fabulous.habits.selfcare
+https://www.reddit.com/r/selfhosted/comments/15m9fgd/dashboards/?utm_source=share&utm_medium=mweb 
+https://www.reddit.com/r/selfhosted/comments/15mzpxb/selfhosters_with_adhd_what_todo_or_project_task/?utm_source=share&utm_medium=mweb
 
 	Setup:
 	https://www.youtube.com/watch?v=70ukrAri1XA
