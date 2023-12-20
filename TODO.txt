@@ -1,9 +1,16 @@
 Todo:
 
 Add
+<<<<<<< HEAD
 	Showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
 	The animation from smart mirrors (graph)
 	Analog clock
 	Ambient Color (https://github.com/luukdv/color.js) 
+=======
+	Add notification center
+	Add showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
+	Add somehow the animation from smart mirrors (graph)
+	Add Analog clock
+>>>>>>> d56d8e72f2538df8b6349688e2cb5557264661eb
 Style
 	Settings Page
