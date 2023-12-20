@@ -25,9 +25,9 @@ export const ctrlSetup = async (req, res) => {
 		"setup": true		
 	}
 
-	writeGeneral(data)
-	loadGeneral()
-	endSetup()
+	await writeGeneral(data)
+	await loadGeneral()
+	await endSetup()
 	console.log('\t' +  ' Setup Finished' + '\n')
 	return res.status(200).json({message: "Setup Finished", status: 0})
 }

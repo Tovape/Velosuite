@@ -1,8 +1,9 @@
 Todo:
 
 Add
-	Add showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
-	Add somehow the animation from smart mirrors (graph)
-	Add Analog clock
+	Showable sidebar that shows links you go most to (like bookmarks, for example the Main excel sheet)
+	The animation from smart mirrors (graph)
+	Analog clock
+	Ambient Color (https://github.com/luukdv/color.js) 
 Style
 	Settings Page
